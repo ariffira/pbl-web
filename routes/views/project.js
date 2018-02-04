@@ -40,15 +40,17 @@ exports = module.exports = function (req, res) {
 		}
 	});
 
-	view.on('post', { action: 'pbl.generate' }, function (next) {
+	view.on('post', { action: 'pbl.create' }, function (next) {
 		// console.log(locals.formData);
 		// creating a new object for project data
 		var newProject = new Project.model({
 			title: locals.formData.title,
 			description: locals.formData.description,
 			createdBy: locals.user._id, // add user data
+			learningGoals: locals.formData.learningGoals,
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
+			resources_upload: locals.formData.resources_upload,
 		});
 		console.log('Generating new PBL project.....');
 		// saving or inserting the data into database

@@ -13,8 +13,10 @@ Project.add({
 	createdBy: { type: Types.Relationship, ref: 'User' },
 	createdAt: { type: Date, default: Date.now },
 	publishedAt: Date,
+	learningGoals: { type: String },
 	file_name: { type: String },
 	uploaded_file_path: { type: Types.Url },
+	resources_upload: { type: Types.Code, language: 'json' },
 });
 
 /**

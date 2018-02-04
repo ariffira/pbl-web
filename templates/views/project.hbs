@@ -1,5 +1,5 @@
 <form method="post" enctype="multipart/form-data">
-	<input type="hidden" name="action" value="pbl.generate">
+	<input type="hidden" name="action" value="pbl.create">
 	<div class="form-group row">
 		<label for="formTitle" class="col-sm-12 col-form-label"><b>Initial Stage: Driving Question Setup</b></label>
 	</div>
@@ -22,22 +22,42 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="pblImage" class="col-sm-2 col-form-label">Add Resource:</label>
-		<div class="col-sm-8">
-			<input type="file" name="file_upload" id="file_upload">
-			<label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
-			<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
-			<div id="new_path"></div>
-			<br>
-		</div>
-		<div class="col-sm-2">
-			<ul id="file_list">
-			</ul>
+     {{#if data.project.uploaded_file_path}}
+		 <label for="pblImage" class="col-sm-2 col-form-label">Uploaded files:</label>
+		 <div class="col-sm-10">
+			 <ul>
+				 <li><a href="#">{{data.project.file_name}}</a></li>
+			 </ul>
+		 </div>
+	 {{else}}
+		 <label for="pblImage" class="col-sm-2 col-form-label">Add Files:</label>
+		 <div class="col-sm-8">
+			 <input type="file" name="file_upload" id="file_upload">
+			 <label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
+			 <input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+			 <div id="new_path"></div>
+			 <br>
+		 </div>
+		 <div class="col-sm-2">
+			 <ul id="file_list">
+			 </ul>
+		 </div>
+	 {{/if}}
+	</div>
+	<div class="form-group">
+		<label for="resources_upload" class="col-md-12"><h5 style="text-align: center">Add Rich Contents(Image, Video, Tweet, List):</h5></label>
+		<div class="col-sm-10">
+			<textarea name="resources_upload" class="form-control sir-trevor" id="file_upload">{{ data.project.resources_upload }}</textarea>
 		</div>
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-10">
-			<button type="submit" class="btn btn-primary">Generate Project</button>
+			{{#if data.project}}
+				<a href="#"class="btn btn-primary form-control col-sm-5">Edit Project Data</a>
+				<a href="#"class="btn btn-secondary form-control col-sm-5">Generate Project</a>
+			{{else}}
+				<button type="submit" class="btn btn-primary">Create project</button>
+			{{/if}}
 		</div>
 	</div>
 </form>

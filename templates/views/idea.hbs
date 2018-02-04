@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="file_upload" class="col-md-12">Add More Content(Text, Image, Video):</label>
+		<label for="file_upload" class="col-md-12"><h5 style="text-align: center">Add Rich Contents(Image, Video, Tweet, List):</h5></label>
 		<div class="col-sm-10">
 		<textarea name="file_upload" class="form-control sir-trevor" id="file_upload">{{ data.idea.file_upload }}</textarea>
 		</div>
@@ -21,7 +21,12 @@
 
 	<div class="form-group row">
 		<div class="col-sm-10">
-			<button type="submit" class="btn btn-primary">Idea Generate</button>
+			{{#if data.idea}}
+				<a href="#"class="btn btn-primary form-control col-sm-5">Edit Idea</a>
+				<a href="#"class="btn btn-secondary form-control col-sm-5">Create Project</a>
+			{{else}}
+				<button type="submit" class="btn btn-primary">Idea Generate</button>
+			{{/if}}
 		</div>
 	</div>
 </form>
