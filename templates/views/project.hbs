@@ -1,0 +1,43 @@
+<form method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="pbl.generate">
+	<div class="form-group row">
+		<label for="formTitle" class="col-sm-12 col-form-label"><b>Initial Stage: Driving Question Setup</b></label>
+	</div>
+	<div class="form-group row">
+		<label for="pblTitle" class="col-sm-2 col-form-label">Project Title:</label>
+		<div class="col-sm-10">
+			<input type="text" name="title" value="{{ data.project.title }}" class="form-control" id="inputTitle" placeholder="Give a title/question/problem/challenge for your project.....">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="ideaDescription" class="col-md-2">Description:</label>
+		<div class="col-sm-10">
+			<textarea name="description" class="form-control" id="ideaGen" rows="3" placeholder="Explain about your project, give a short summary...">{{ data.project.description }}</textarea>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="learningGoals" class="col-sm-2 col-form-label">Learning Goals:</label>
+		<div class="col-sm-10">
+			<input type="text" name="learningGoals" value="{{ data.project.learningGoals }}" class="form-control" id="inputlearningGoals" placeholder="Give List of Learning goals...">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="pblImage" class="col-sm-2 col-form-label">Add Resource:</label>
+		<div class="col-sm-8">
+			<input type="file" name="file_upload" id="file_upload">
+			<label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
+			<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+			<div id="new_path"></div>
+			<br>
+		</div>
+		<div class="col-sm-2">
+			<ul id="file_list">
+			</ul>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-sm-10">
+			<button type="submit" class="btn btn-primary">Generate Project</button>
+		</div>
+	</div>
+</form>

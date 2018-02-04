@@ -1,0 +1,33 @@
+<div class="card">
+	<h5 class="card-header">Name: {{user.name.first}} {{user.name.last}}</h5>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<img class="d-flex mr-3" src="http://placehold.it/180x180" alt="profile photo">
+			</div>
+			<div class="col-sm-8">
+				<form action="/photoUpload" method="post" enctype="multipart/form-data">
+					<input type="file" name="myPhoto" >
+					<input type="submit" value="Upload Photo" class="btn btn-primary">
+				</form>
+			</div>
+		</div><hr>
+		<div class="row">
+			<label for="aboutYou" class="col-md-2"><h5>About Yourself:</h5></label>
+			<div class="col-sm-10">
+				<textarea name="aboutYou" class="form-control" rows="2" placeholder="Write down something about you......."></textarea>
+			</div>
+		</div>
+		<div class="row">
+		<a href="#" class="btn btn-primary">Edit Profile</a>
+		</div>
+	</div>
+</div>
+
+
+<!--
+<h3>Name:  {{!--user.name.first}} {{user.name.last}}</h3>
+<h3>Email: {{user.email}}</h3>
+<h3>Institution: {{user.institution}}</h3>
+<h3>Institution Type: {{user.institutionType}}</h3>
+<h3>You are a {{user.role--}}</h3>-->

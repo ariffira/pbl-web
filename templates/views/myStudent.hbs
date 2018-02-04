@@ -1,0 +1,94 @@
+<!-- Add student button as Modal -->
+<!-- Button trigger modal -->
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-6">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStudentModal">
+				Add new Student
+			</button>
+		</div>
+	</div>
+</div>
+
+<!-- student list table start -->
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-12">
+			<table class="table table-bordered">
+				<caption>List of Students</caption>
+				<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Id</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td>Larry the Bird</td>
+					<td>@twitter</td>
+					<td>@twitter</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- student list table end -->
+</div>
+
+<!-- Modal for add student -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- add student form start -->
+				<form method="post">
+					<input type="hidden" name="action" value="add.student">
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label>Full Name:</label>
+								<input type="text" name="name" class="form-control" value="{{formData.name}}" placeholder="Full Name..">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label>Email:</label>
+								<input type="text" name="email" class="form-control" value="{{formData.email}}" placeholder="email@pbl.com">
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+					</div>
+				</form>
+				<!-- add student form end -->
+			</div>
+		</div>
+	</div>
+</div>
