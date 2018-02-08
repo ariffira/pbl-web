@@ -74,7 +74,7 @@ exports = module.exports = function (app) {
 	app.all('/api/fileupload/create', keystone.middleware.api, routes.api.fileupload.create);
 	app.get('/api/fileupload/:id/remove', keystone.middleware.api, routes.api.fileupload.remove);
 	// upload for sir trevor image file
-	app.all('/api/fileupload/createNew', keystone.middleware.api, routes.api.fileupload.createNew);
+	app.all('/api/fileupload/newImgFile', keystone.middleware.api, routes.api.fileupload.newImgFile);
 	// File Upload Route end here
 
 	// Image upload start

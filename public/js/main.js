@@ -31,7 +31,7 @@ function uploadMyFile () {
 
 			// Fill out the file metadata information
 			data.file_upload.name = $('#file_name').val();
-			data.file_upload.url = '/protected/uploads/files/' + data.file_upload.file.filename;
+			data.file_upload.url = '/uploads/files/' + data.file_upload.file.filename;
 			data.file_upload.fileType = data.file_upload.file.mimetype;
 			data.file_upload.createdTimeStamp = new Date();
 
@@ -42,8 +42,9 @@ function uploadMyFile () {
 				console.log('File information updated.....');
 
 				// Add the uploaded file to the uploaded file list.
-				$('#file_list').append('<li>' + data.collection.name + '</li>');
-                // sending back file new path input
+				// $('#file_list').append('<li>' + data.collection.name + '</li>');
+				$('#file_list').append('<li><a href="' + data.collection.url + '" download>' + data.collection.name + '</a></li>');
+				// sending back file new path input
 				$('#new_path').append('<input type="hidden" name="uploaded_file_path" value="' + data.collection.url + '">');
 
 

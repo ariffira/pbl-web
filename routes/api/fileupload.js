@@ -78,9 +78,9 @@ exports.create = function (req, res) {
 };
 
 /**
- * Upload a New File for sir trevor image instance
+ * Upload a New Image File for sir trevor image instance
  */
-exports.createNew = function (req, res) {
+exports.newImgFile = function (req, res) {
 	// var	data = (req.method == 'POST') ? req.body : req.query;
 	// console.log(data);
 	// console.log(req.files); // req.files is an object not json file
@@ -90,7 +90,7 @@ exports.createNew = function (req, res) {
 	console.log(tmpFile);
 	fs.readFile(tmpFile.path, function (err, data) {
 
-		var newPath = 'public/uploads/files/' + tmpFile.name;  // log data to find your right files path
+		var newPath = 'public/uploads/images/' + tmpFile.name;  // log data to find your right files path
 		fs.writeFile(newPath, data, function (err) {
 
 			if (err)
@@ -103,7 +103,7 @@ exports.createNew = function (req, res) {
 			{
 				// todo: fix path name problem among sir-trevor file-system and keystone
 				// rename path as keystone image only take /uploads/files format not public/uploads/files
-				var finalPath = '/uploads/files/' + tmpFile.name;
+				var finalPath = '/uploads/images/' + tmpFile.name;
 				// save file url based on sir trevor format { file: { url: '/xyz/abc.jpg' }}
 				var path = {
 					file: {

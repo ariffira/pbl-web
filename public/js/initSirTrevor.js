@@ -5,7 +5,7 @@ $(document).ready(function () {
 		blockTypes: ['Text', 'Image', 'Video', 'Tweet', 'List'],
 	});
 	SirTrevor.setDefaults({
-		uploadUrl: '/api/fileupload/createNew',
+		uploadUrl: '/api/fileupload/newImgFile',
 		iconUrl: 'sir-trevor-0.6.6/sir-trevor-icons.svg',
 	});
 });

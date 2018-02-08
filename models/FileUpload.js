@@ -12,8 +12,8 @@ var FileUpload = new keystone.List('FileUpload');
 var myStorage = new keystone.Storage({
 	adapter: keystone.Storage.Adapters.FS,
 	fs: {
-		path: keystone.expandPath('./protected/uploads/files'), // required; path where the files should be stored
-		publicPath: '/protected/uploads/files', // path where files will be served
+		path: keystone.expandPath('./public/uploads/files'), // required; path where the files should be stored
+		publicPath: '/public/uploads/files', // path where files will be served
 	},
 });
 
