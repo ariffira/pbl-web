@@ -61,10 +61,11 @@ exports = module.exports = function (app) {
 	app.get('/dashboard', middleware.requirePblUser, routes.views.dashboard);
 	app.all('/idea', middleware.requirePblUser, routes.views.idea);
 	app.all('/idea/:id', middleware.requirePblUser, routes.views.idea);
-	app.get('/myStudent', middleware.requirePblUser, routes.views.myStudent);
+	app.all('/myStudent', middleware.requirePblUser, routes.views.myStudent);
 	app.get('/myProfile', middleware.requirePblUser, routes.views.myProfile);
 	app.all('/project', middleware.requirePblUser, routes.views.project);
 	app.all('/project/:id', middleware.requirePblUser, routes.views.project);
+	app.all('/project/generate', middleware.requirePblUser, routes.views.project);
 	app.get('/showcase', middleware.requirePblUser, routes.views.showcase);
 
 	// File Upload Route

@@ -17,11 +17,7 @@ exports = module.exports = function (req, res) {
 	locals.validationErrors = {};
 	locals.projectSubmitted = false;
 	// locals.page.title = 'Generate Project';
-	/*
-	locals.filters = {
-		category: req.params.category
-	};
-	*/
+
 	locals.data = {
 		project: [],
 	};
@@ -32,7 +28,7 @@ exports = module.exports = function (req, res) {
 			console.log('successfully create new project...');
 			Project.model.findById(req.params.id).exec(function (err, result) {
 				locals.data.project = result;
-				console.log(result);
+				// console.log(result);
 			});
 			next();
 		}
@@ -41,7 +37,7 @@ exports = module.exports = function (req, res) {
 		}
 	});
 
-	// insert new project data into database
+	// insert if new/update if id exist
 	view.on('post', { action: 'pbl.create' }, function (next) {
 		console.log(req.params.id);
 		// console.log(locals.formData);
@@ -56,15 +52,17 @@ exports = module.exports = function (req, res) {
 			resources_upload: locals.formData.resources_upload,
 		});
 		console.log('Generating new PBL project.....');
+		var id = req.params.id;
+		console.log(id);
 		// saving or inserting the data into database
-		newProject.save({ _id: req.params.id }, function (err, result) {
+		newProject.save({ _id: id }, function (err, result) {
 			if (err) {
 				locals.data.validationErrors = err.errors;
 				console.log(err);
 			} else {
 				req.flash('success', { success: 'A new Project data saved successfully' });
 				locals.projectSubmitted = true;
-				console.log(result);
+				// console.log(result);
 				return res.redirect('/project/' + result._id);
 			}
 			next();
@@ -77,19 +75,16 @@ exports = module.exports = function (req, res) {
 		console.log(req.params.id);
 		var id = req.params.id;
 		Project.model.findById(id, function (err, project) {
-			var newProject = new Project.model({
-				title: locals.formData.title,
-				description: locals.formData.description,
-				createdBy: locals.user._id, // add user data
-				learningGoals: locals.formData.learningGoals,
-				file_name: locals.formData.file_name,
-				uploaded_file_path: locals.formData.uploaded_file_path,
-				resources_upload: locals.formData.resources_upload,
-			});
-			project.set(newProject);
+			console.log(project);
 			project.save(function (err, result) {
-				locals.data.project = result;
-				console.log(locals.data.project);
+				if (err) {
+					locals.data.validationErrors = err.errors;
+					console.log(err);
+				} else {
+					locals.projectSubmitted = true;
+					// console.log(result);
+					return res.redirect('/project/' + result._id);
+				}
 			});
 		});
 		next();

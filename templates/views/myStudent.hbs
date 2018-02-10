@@ -18,31 +18,32 @@
 				<caption>List of Students</caption>
 				<thead>
 				<tr>
-					<th scope="col">#</th>
+					<th scope="col">index</th>
 					<th scope="col">Name</th>
 					<th scope="col">Email</th>
 					<th scope="col">Id</th>
+					<th scope="col">setting</th>
 				</tr>
 				</thead>
 				<tbody>
+				{{#each data.students}}
 				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
+					<th scope="row">{{@index}}</th>
+						<td>
+							{{name}}
+						</td>
+						<td>
+							{{email}}
+						</td>
+						<td>
+							{{_id}}
+						</td>
+						<td>
+							<button type="button" class="btn btn-success">Update</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</td>
 				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry the Bird</td>
-					<td>@twitter</td>
-					<td>@twitter</td>
-				</tr>
+				{{/each}}
 				</tbody>
 			</table>
 		</div>
@@ -68,7 +69,7 @@
 						<div class="form-row">
 							<div class="col-md-12">
 								<label>Full Name:</label>
-								<input type="text" name="name" class="form-control" value="{{formData.name}}" placeholder="Full Name..">
+								<input type="text" name="name" class="form-control" placeholder="Full Name..">
 							</div>
 						</div>
 					</div>
@@ -76,7 +77,7 @@
 						<div class="form-row">
 							<div class="col-md-12">
 								<label>Email:</label>
-								<input type="text" name="email" class="form-control" value="{{formData.email}}" placeholder="email@pbl.com">
+								<input type="text" name="email" class="form-control" placeholder="email@pbl.com">
 							</div>
 						</div>
 					</div>
