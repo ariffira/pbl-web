@@ -36,5 +36,5 @@ node_modules
 .svn
 
 # upload storage
-public/uploads/files
-protected/uploads/files
+public/uploads/
+protected/uploads/

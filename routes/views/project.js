@@ -37,7 +37,7 @@ exports = module.exports = function (req, res) {
 		}
 	});
 
-	// insert if new/update if id exist
+	// insert/update if id exist
 	view.on('post', { action: 'pbl.create' }, function (next) {
 		console.log(req.params.id);
 		// console.log(locals.formData);
@@ -46,48 +46,42 @@ exports = module.exports = function (req, res) {
 			title: locals.formData.title,
 			description: locals.formData.description,
 			createdBy: locals.user._id, // add user data
-			learningGoals: locals.formData.learningGoals,
+			allLearningGoals: locals.formData.allLearningGoals,
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
 			resources_upload: locals.formData.resources_upload,
 		});
+		console.log(newProject);
 		console.log('Generating new PBL project.....');
 		var id = req.params.id;
 		console.log(id);
-		// saving or inserting the data into database
-		newProject.save({ _id: id }, function (err, result) {
-			if (err) {
-				locals.data.validationErrors = err.errors;
-				console.log(err);
-			} else {
-				req.flash('success', { success: 'A new Project data saved successfully' });
-				locals.projectSubmitted = true;
-				// console.log(result);
-				return res.redirect('/project/' + result._id);
-			}
-			next();
-		});
-	});
+		if (id) {
+			Project.model.findById(id).exec(function (err, item) {
+				if (err) return res.apiError('database error', err);
+				if (!item) return res.apiError('not found');
 
-	// update existing data by id
-	view.on('post', { action: 'pbl.update' }, function (next) {
-		console.log('Updating .................');
-		console.log(req.params.id);
-		var id = req.params.id;
-		Project.model.findById(id, function (err, project) {
-			console.log(project);
-			project.save(function (err, result) {
+				var data = (req.method == 'POST') ? req.body : req.query;
+				data.createdBy = locals.user._id;
+				item.getUpdateHandler(req).process(data, function (err) {
+					console.log(data);
+				});
+				return res.redirect('/project/' + id);
+			});
+		} else {
+			// saving or inserting the data into database
+			newProject.save(function (err, result) {
 				if (err) {
 					locals.data.validationErrors = err.errors;
 					console.log(err);
 				} else {
+					req.flash('success', { success: 'A new Project data saved successfully' });
 					locals.projectSubmitted = true;
 					// console.log(result);
 					return res.redirect('/project/' + result._id);
 				}
+				next();
 			});
-		});
-		next();
+		}
 	});
 
 	// Render the view

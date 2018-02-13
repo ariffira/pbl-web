@@ -6,7 +6,7 @@ $(document).ready(function () {
 	});
 	SirTrevor.setDefaults({
 		uploadUrl: '/api/fileupload/newImgFile',
-		iconUrl: 'sir-trevor-0.6.6/sir-trevor-icons.svg',
+		iconUrl: '/sir-trevor-0.6.6/sir-trevor-icons.svg',
 	});
 });
 

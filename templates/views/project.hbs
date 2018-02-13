@@ -1,7 +1,14 @@
 <form method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="pbl.create">
 	<div class="form-group row">
-		<label for="formTitle" class="col-sm-12 col-form-label"><b>Initial Stage: Driving Question Setup</b></label>
+		<label for="formTitle" class="col-sm-12 col-form-label">
+			<b>Initial Stage:
+				{{#if data.project}}
+					Project information
+				{{else}}
+					Driving Question Setup
+				{{/if}}</b>
+		</label>
 	</div>
 	<div class="form-group row">
 		<label for="pblTitle" class="col-sm-2 col-form-label">Project Title:</label>
@@ -17,8 +24,13 @@
 	</div>
 	<div class="form-group row">
 		<label for="learningGoals" class="col-sm-2 col-form-label">Learning Goals:</label>
-		<div class="col-sm-10">
-			<input type="text" name="learningGoals" value="{{ data.project.learningGoals }}" class="form-control" id="inputlearningGoals" placeholder="Give List of Learning goals...">
+			<div class="col-sm-10">
+			<input type="text" name="learningGoal" value="{{ data.project.allLearningGoals }}" class="col-sm-8" id="inputlearningGoals" placeholder="Give List of Learning goals...">
+			<input type="button" value="Add" class="btn btn-primary col-sm-2" onclick="addLearningGoals()">
+		</div>
+		<div class="col-sm-12">
+			<ul id="learningGoalList">
+			</ul>
 		</div>
 	</div>
 	<!--
@@ -55,11 +67,18 @@
 	<div class="form-group row">
 		<div class="col-sm-10">
 			{{#if data.project}}
-				<button type="submit" class="btn btn-primary form-control col-sm-5">Edit</button>
-				<a href="/project/generate"class="btn btn-secondary form-control col-sm-5">Generate Project</a>
+				<button type="submit" class="btn btn-primary form-control col-sm-5">Update Project Data</button>
 			{{else}}
 				<button type="submit" class="btn btn-primary">Create project</button>
 			{{/if}}
 		</div>
 	</div>
 </form>
+{{#if data.project}}
+<hr>
+<div>
+	<label class="col-md-12"><h5 style="text-align: center">Participants</h5></label>
+</div>
+<hr>
+<a href="/project/generate"class="btn btn-success form-control col-sm-5">Generate Project</a>
+{{/if}}

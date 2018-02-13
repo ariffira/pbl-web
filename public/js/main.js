@@ -38,7 +38,7 @@ function uploadMyFile () {
 			// Update the file with the information above.
 			$.get('/api/fileupload/' + data.file_upload._id + '/update', data.file_upload, function (data) {
 				// debugger;
-                console.log(data.collection);
+				console.log(data.collection);
 				console.log('File information updated.....');
 
 				// Add the uploaded file to the uploaded file list.
@@ -79,3 +79,8 @@ function uploadMyFile () {
 
 }
 
+function addLearningGoals () {
+	var learningGoal = document.getElementById('inputlearningGoals').value;
+	$('#learningGoalList').append('<li>' + learningGoal + '</li>');
+	$('#learningGoalList').append('<input type="hidden" name="allLearningGoals" value="' + learningGoal + '">');
+}

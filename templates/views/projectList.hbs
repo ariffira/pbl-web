@@ -1,0 +1,47 @@
+<!-- project list table start -->
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-12">
+			{{#if data.projects}}
+			<table class="table table-bordered">
+				<caption>List of Projects</caption>
+				<thead>
+				<tr>
+					<th scope="col">index</th>
+					<th scope="col">Title</th>
+					<th scope="col">Created AT</th>
+					<th scope="col">Id</th>
+					<th scope="col">Start</th>
+					<th scope="col">End</th>
+				</tr>
+				</thead>
+				<tbody>
+				{{#each data.projects}}
+					<tr>
+						<th scope="row">{{@index}}</th>
+						<td>
+							<a href="">{{title}}</a>
+						</td>
+						<td>
+							{{createdAt}}
+						</td>
+						<td>
+							{{_id}}
+						</td>
+						<td>
+							start-date
+						</td>
+						<td>
+							end-date
+						</td>
+					</tr>
+				{{/each}}
+				</tbody>
+			</table>
+				{{else}}
+				<h5>No project record yet. Please generate a project first</h5>
+				{{/if}}
+		</div>
+	</div>
+	<!-- project list table end -->
+</div>

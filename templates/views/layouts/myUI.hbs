@@ -46,18 +46,62 @@
 						<span class="nav-link-text">Student Management</span>
 					</a>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Generate Project">
-					<a class="nav-link" href="/project">
-						<i class="fa fa-fw fa-list-ul"></i>
-						<span class="nav-link-text">Create Project</span>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+						<i class="fa fa-fw fa-wrench"></i>
+						<span class="nav-link-text">Manage Projects</span>
 					</a>
+					<ul class="sidenav-second-level collapse" id="collapseComponents">
+						<li>
+							<a class="nav-link" href="/project">
+								<i class="fa fa-fw fa-pencil"></i>
+								<span class="nav-link-text">Create Project</span>
+							</a>
+						</li>
+						<li>
+							<a class="nav-link" href="/projectList">
+								<i class="fa fa-fw fa-list-ul"></i>
+								<span class="nav-link-text">Ongoing Projects</span>
+							</a>
+						</li>
+					</ul>
 				</li>
 			{{/ifeq}}
 			<!-- END of If user role as teacher than can manage students and team-->
+			
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Investigation Process">
+				<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+					<i class="fa fa-fw fa-wpexplorer"></i>
+					<span class="nav-link-text">Investigation Process</span>
+				</a>
+				<ul class="sidenav-second-level collapse" id="collapseMulti">
+					<li>
+						<a href="/taskPlan"><i class="fa fa-fw fa-tasks"></i>Task Planning</a>
+					</li>
+					<li>
+						<a href="/collectResource"><i class="fa fa-fw fa-sitemap"></i>Collect Resources</a>
+					</li>
+					<li>
+						<a href="/learningAgenda"><i class="fa fa-fw fa-question-circle"></i>Learning Agendas</a>
+					</li>
+				</ul>
+			</li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Idea Generation">
 				<a class="nav-link" href="/idea">
-					<i class="fa fa-fw fa-area-chart"></i>
+					<i class="fa fa-fw fa-lightbulb-o"></i>
 					<span class="nav-link-text">Idea Generation</span>
+				</a>
+			</li>
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Documentation">
+				<a class="nav-link" href="/documentation">
+					<i class="fa fa-fw fa-book"></i>
+					<span class="nav-link-text">Documentation</span>
+				</a>
+			</li>
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Artefact Presentation">
+				<a class="nav-link" href="/presentation">
+					<i class="fa fa-fw fa-area-chart"></i>
+					<span class="nav-link-text">Artefact Presentation</span>
 				</a>
 			</li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Your Profile">
@@ -70,12 +114,6 @@
 				<a class="nav-link" href="/showcase">
 					<i class="fa fa-fw fa-newspaper-o"></i>
 					<span class="nav-link-text">Showcases</span>
-				</a>
-			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ongoing Projects">
-				<a class="nav-link" href="/pblOn">
-					<i class="fa fa-fw fa-line-chart"></i>
-					<span class="nav-link-text">Ongoing Projects</span>
 				</a>
 			</li>
 		</ul>

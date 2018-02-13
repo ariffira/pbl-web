@@ -66,6 +66,12 @@ exports = module.exports = function (app) {
 	app.all('/project', middleware.requirePblUser, routes.views.project);
 	app.all('/project/:id', middleware.requirePblUser, routes.views.project);
 	app.all('/project/generate', middleware.requirePblUser, routes.views.project);
+	app.get('/projectList', middleware.requirePblUser, routes.views.projectList);
+	app.all('/taskPlan', middleware.requirePblUser, routes.views.taskPlan);
+	app.all('/collectResource', middleware.requirePblUser, routes.views.collectResource);
+	app.all('/learningAgenda', middleware.requirePblUser, routes.views.learningAgenda);
+	app.all('/documentation', middleware.requirePblUser, routes.views.documentation);
+	app.all('/presentation', middleware.requirePblUser, routes.views.presentation);
 	app.get('/showcase', middleware.requirePblUser, routes.views.showcase);
 
 	// File Upload Route
