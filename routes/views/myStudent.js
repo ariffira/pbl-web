@@ -23,7 +23,10 @@ exports = module.exports = function (req, res) {
 
 	// initial view and show all students list
 	view.on('init', function (next) {
-		MyStudent.model.find().exec(function (err, result) {
+		var id = locals.user._id;
+		var query = MyStudent.model.find();
+		query.where('createdBy', id);
+		query.exec(function (err, result) {
 			locals.data.students = result;
 			console.log(result);
 			next();

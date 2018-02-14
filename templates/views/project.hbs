@@ -76,9 +76,18 @@
 </form>
 {{#if data.project}}
 <hr>
-<div>
-	<label class="col-md-12"><h5 style="text-align: center">Participants</h5></label>
-</div>
+<form method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="project.participants">
+	<div class="form-group row">
+		<label class="col-md-12"><h5 style="text-align: center">Participants</h5></label>
+		<div class="col-sm-12">
+			<input type="text" name="participants" class="form-control" id="participants" placeholder="Select students">
+		</div>
+		<div class="col-sm-12">
+			<button type="submit" class="btn btn-primary col-sm-2">Add participants</button>
+		</div>
+	</div>
+</form>
 <hr>
 <a href="/project/generate"class="btn btn-success form-control col-sm-5">Generate Project</a>
 {{/if}}

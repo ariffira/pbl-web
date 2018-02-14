@@ -50,6 +50,7 @@ exports = module.exports = function (req, res) {
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
 			resources_upload: locals.formData.resources_upload,
+			// participants: locals.formData.participants,
 		});
 		console.log(newProject);
 		console.log('Generating new PBL project.....');
@@ -82,6 +83,27 @@ exports = module.exports = function (req, res) {
 				next();
 			});
 		}
+	});
+
+	// add participants into project
+	view.on('post', { action: 'project.participants' }, function (next) {
+		// console.log(locals.formData);
+		// creating a new object for project data
+		var participants = new Project.model({
+			// createdBy: locals.user._id, // add user data
+			participants: locals.formData.participants,
+		});
+		console.log(participants);
+		var id = req.params.id;
+		console.log(id);
+		Project.model.findById(id).exec(function (err, item) {
+			var data = (req.method == 'POST') ? req.body : req.query;
+			item.getUpdateHandler(req).process(data, function (err) {
+				console.log(data);
+			});
+		});
+		console.log('added students');
+		next();
 	});
 
 	// Render the view
