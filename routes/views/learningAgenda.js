@@ -1,5 +1,5 @@
 // @file learningAgenda.js
-// @path /routes/views/learningAgenda.js
+// @path /routes/views/learningAgenda.hbs.js
 // @description add list of questionnaire for project
 // @author: MD Ariful Islam
 
@@ -17,5 +17,5 @@ exports = module.exports = function (req, res) {
 	locals.validationErrors = {};
 
 	// Render the view
-	view.render('', { layout: 'myUI' });
+	view.render('learningAgenda.hbs', { layout: 'myUI' });
 };

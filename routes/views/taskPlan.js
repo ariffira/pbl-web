@@ -18,5 +18,5 @@ exports = module.exports = function (req, res) {
 	locals.validationErrors = {};
 
 	// Render the view
-	view.render('', { layout: 'myUI' });
+	view.render('taskPlanning', { layout: 'myUI' });
 };

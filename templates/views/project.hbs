@@ -88,6 +88,34 @@
 		</div>
 	</div>
 </form>
+{{#if data.project.participants}}
+<!-- added student list-->
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-12">
+			<table class="table table-bordered">
+				<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.project.participants.name}}
+						</td>
+						<td>
+							{{data.project.participants}}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- added student list end -->
+</div>
+{{/if}}
 <hr>
 <a href="/project/generate"class="btn btn-success form-control col-sm-5">Generate Project</a>
 {{/if}}

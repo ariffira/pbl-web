@@ -1,0 +1,75 @@
+{{#if data.projects}}
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-12">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addResourceModal">
+					Add Resource
+				</button>
+			</div>
+		</div>
+	</div>
+	{{#each data.projects}}
+	{{/each}}
+{{else}}
+	{{#ifeq user.role 'student' }}
+		<div class="form-group">
+			<div class="form-row">
+				<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+			</div>
+		</div>
+	{{/ifeq}}
+	{{#ifeq user.role 'teacher' }}
+		<div class="form-group">
+			<div class="form-row">
+				<h5>You do not have any project yet. Please create project and add your students in the project then generate it</h5>
+			</div>
+		</div>
+	{{/ifeq}}
+{{/if}}
+
+<!-- Modal for add Task -->
+<div class="modal fade" id="addResourceModal" tabindex="-1" role="dialog" aria-labelledby="addResourceModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addResourceModalLabel">Add Resource</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- add Resource form start -->
+				<form method="post">
+					<input type="hidden" name="action" value="add.Resource">
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label>Resource name:</label>
+								<input type="text" name="name" class="form-control" placeholder="Give a name..">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label> Resource Type</label>
+								<select>
+									<option>Hyperlink/website</option>
+									<option>Video</option>
+									<option>Article</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+					</div>
+				</form>
+				<!-- add Resource form end -->
+			</div>
+		</div>
+	</div>
+</div>

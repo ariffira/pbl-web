@@ -25,7 +25,7 @@ exports = module.exports = function (req, res) {
 	// initial view  and after insert view of project
 	view.on('init', function (next) {
 		if (req.params.id) {
-			console.log('successfully create new project...');
+			// console.log('successfully create new project...');
 			Project.model.findById(req.params.id).exec(function (err, result) {
 				locals.data.project = result;
 				// console.log(result);
@@ -39,7 +39,7 @@ exports = module.exports = function (req, res) {
 
 	// insert/update if id exist
 	view.on('post', { action: 'pbl.create' }, function (next) {
-		console.log(req.params.id);
+		// console.log(req.params.id);
 		// console.log(locals.formData);
 		// creating a new object for project data
 		var newProject = new Project.model({
@@ -52,10 +52,10 @@ exports = module.exports = function (req, res) {
 			resources_upload: locals.formData.resources_upload,
 			// participants: locals.formData.participants,
 		});
-		console.log(newProject);
-		console.log('Generating new PBL project.....');
+		// console.log(newProject);
+		// console.log('Generating new PBL project.....');
 		var id = req.params.id;
-		console.log(id);
+		// console.log(id);
 		if (id) {
 			Project.model.findById(id).exec(function (err, item) {
 				if (err) return res.apiError('database error', err);
@@ -64,7 +64,7 @@ exports = module.exports = function (req, res) {
 				var data = (req.method == 'POST') ? req.body : req.query;
 				data.createdBy = locals.user._id;
 				item.getUpdateHandler(req).process(data, function (err) {
-					console.log(data);
+					// console.log(data);
 				});
 				return res.redirect('/project/' + id);
 			});
@@ -87,22 +87,17 @@ exports = module.exports = function (req, res) {
 
 	// add participants into project
 	view.on('post', { action: 'project.participants' }, function (next) {
-		// console.log(locals.formData);
+		console.log(locals.formData);
 		// creating a new object for project data
-		var participants = new Project.model({
-			// createdBy: locals.user._id, // add user data
-			participants: locals.formData.participants,
-		});
-		console.log(participants);
 		var id = req.params.id;
 		console.log(id);
 		Project.model.findById(id).exec(function (err, item) {
-			var data = (req.method == 'POST') ? req.body : req.query;
+			var data = locals.formData;
+			data.createdBy = locals.user._id;
 			item.getUpdateHandler(req).process(data, function (err) {
-				console.log(data);
+				console.log('new students added');
 			});
 		});
-		console.log('added students');
 		next();
 	});
 

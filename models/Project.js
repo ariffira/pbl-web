@@ -17,7 +17,9 @@ Project.add({
 	file_name: { type: String },
 	uploaded_file_path: { type: Types.Url },
 	resources_upload: { type: Types.Code, language: 'json' },
-	participants: { type: Types.Code, language: 'json' },
+	participants: { type: String },
+	// participants: { type: Types.Code, language: 'json' },
+	// participants: { type: Types.Relationship, ref: 'MyStudent', many: true },
 });
 
 /**

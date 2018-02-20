@@ -28,7 +28,7 @@ exports = module.exports = function (req, res) {
 		query.where('createdBy', id);
 		query.exec(function (err, result) {
 			locals.data.students = result;
-			console.log(result);
+			// console.log(result);
 			next();
 		});
 

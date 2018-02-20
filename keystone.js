@@ -64,4 +64,32 @@ keystone.set('nav', {
 // Start Keystone to connect to your database and initialise the web server
 
 
-keystone.start();
+// keystone.start();
+var socketio = require('socket.io');
+
+keystone.start(
+	{
+		onHttpServerCreated: function () {
+			keystone.set('io', socketio.listen(keystone.httpServer));
+			var io = keystone.get('io');
+			// Whenever someone connects this gets executed
+			io.on('connection', function(socket) {
+				console.log('Socket message: A user connected.......');
+				// Whenever someone disconnects this piece of code executed
+				socket.on('disconnect', function () {
+					console.log('Socket message: A user disconnected..........');
+				});
+			});
+		},
+		/*
+		onStart: function () {
+			var io = keystone.get('io');
+			io.on('connect', function (socket) {
+				console.log('connected............');
+				socket.on('disconnect', function () {
+					console.log('disconnected........');
+				});
+			});
+		}
+		*/
+	});

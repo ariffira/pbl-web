@@ -27,10 +27,10 @@ var multer = require('multer');
 // var upload = multer({ dest: 'uploads/files' });
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, 'protected/uploads/files')
+		cb(null, 'protected/uploads/files');
 	},
 	filename: function (req, file, cb) {
-		cb(null, file.fieldname + '-' + Date.now())
+		cb(null, file.fieldname + '-' + Date.now());
 	},
 });
 
@@ -44,7 +44,7 @@ keystone.pre('render', middleware.flashMessages);
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views'),
-	api: importRoutes('./api'),  // import API controllers File Upload
+	api: importRoutes('./api'),  // import API controllers
 };
 
 // Setup Route Bindings
@@ -73,6 +73,9 @@ exports = module.exports = function (app) {
 	app.all('/documentation', middleware.requirePblUser, routes.views.documentation);
 	app.all('/presentation', middleware.requirePblUser, routes.views.presentation);
 	app.get('/showcase', middleware.requirePblUser, routes.views.showcase);
+
+	// my api
+	app.get('/api/myData/list', keystone.middleware.api, routes.api.myData.list);
 
 	// File Upload Route
 	app.get('/api/fileupload/list', keystone.middleware.api, routes.api.fileupload.list);

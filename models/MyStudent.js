@@ -14,6 +14,11 @@ MyStudent.add({
 });
 
 /**
+ * Relationships
+ */
+// MyStudent.relationship({ ref: 'Project', path: 'projects', refPath: 'participants' });
+
+/**
  * page registration
  */
 // default columns
