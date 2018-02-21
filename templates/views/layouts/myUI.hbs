@@ -175,9 +175,10 @@
 					<h6 class="dropdown-header">New Alerts:</h6>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#">
-              <span class="text-success">
+              <span class="text-success" id="alertnotify">
                 <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Project Update</strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Project Update
+				</strong>
               </span>
 						<span class="small float-right text-muted">11:21 AM</span>
 						<div class="dropdown-message small">5 Tasks are on doing condition for project: Advance agriculture by IOT technology.</div>
@@ -321,6 +322,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
 	<script>
 		var socket = io();
+		socket.on('notifytest', function(data)
+		{
+			document.getElementById('alertnotify').innerHTML = 'my first notification test';
+		});
 	</script>
 	{{{isPblEditorJS user}}}
 </div>

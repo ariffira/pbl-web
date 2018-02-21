@@ -73,8 +73,9 @@ keystone.start(
 			keystone.set('io', socketio.listen(keystone.httpServer));
 			var io = keystone.get('io');
 			// Whenever someone connects this gets executed
-			io.on('connection', function(socket) {
+			io.on('connection', function (socket) {
 				console.log('Socket message: A user connected.......');
+				socket.emit('notifytest', { description: 'A custom event named testerEvent!'});
 				// Whenever someone disconnects this piece of code executed
 				socket.on('disconnect', function () {
 					console.log('Socket message: A user disconnected..........');
