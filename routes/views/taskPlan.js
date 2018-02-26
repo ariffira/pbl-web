@@ -1,11 +1,11 @@
 // @file taskPlan.js
 // @path /routes/views/taskPlan.js
 // @description Tasks planning for project will be shown here
-// include: add new tasks, check task status, flow experience task
+// include: add new tasks, check task status, flow experience supported task as doing
 // @author: MD Ariful Islam
 
 var keystone = require('keystone');
-// var Project = keystone.list('Project');
+var TaskPlan = keystone.list('TaskPlan');
 
 exports = module.exports = function (req, res) {
 
@@ -16,6 +16,10 @@ exports = module.exports = function (req, res) {
 	locals.section = 'Task Planning';
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
+
+	// initial page to create task and shows list of task and their status
+
+	// add task
 
 	// Render the view
 	view.render('taskPlanning', { layout: 'myUI' });

@@ -28,6 +28,7 @@ module.exports = function () {
 		}
 	};
 
+
 	/**
 	 * Port of Ghost helpers to support cross-theming
 	 * ==============================================

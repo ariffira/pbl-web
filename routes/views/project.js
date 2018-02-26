@@ -20,15 +20,23 @@ exports = module.exports = function (req, res) {
 
 	locals.data = {
 		project: [],
+		participants: [],
+		allLearningGoals: [],
 	};
 
 	// initial view  and after insert view of project
 	view.on('init', function (next) {
 		if (req.params.id) {
 			// console.log('successfully create new project...');
-			Project.model.findById(req.params.id).exec(function (err, result) {
+			Project.model.findById(req.params.id).populate('createdBy').exec(function (err, result) {
 				locals.data.project = result;
-				// console.log(result);
+				// console.log(result.allLearningGoals[0]);
+				var participants = JSON.parse(result.participants);
+				var allLearningGoals = JSON.parse(result.allLearningGoals);
+				// console.log(obj[0]);
+				locals.data.participants = participants;
+				locals.data.allLearningGoals = allLearningGoals;
+				// console.log(locals.data.project);
 			});
 			next();
 		}
@@ -40,19 +48,27 @@ exports = module.exports = function (req, res) {
 	// insert/update if id exist
 	view.on('post', { action: 'pbl.create' }, function (next) {
 		// console.log(req.params.id);
-		// console.log(locals.formData);
+		// console.log(locals.formData.allLearningGoals[1]);
+		var arr = locals.formData.allLearningGoals;
+		console.log(arr[0]);
+		var i;
+		var learningGoalArr = [];
+		for (i = 0; i < arr.length; i++) {
+			learningGoalArr.push({ goal: arr[i] });
+		}
+		console.log(learningGoalArr[0]);
+		var objlearningGoalArr = JSON.stringify(learningGoalArr);
 		// creating a new object for project data
 		var newProject = new Project.model({
 			title: locals.formData.title,
 			description: locals.formData.description,
 			createdBy: locals.user._id, // add user data
-			allLearningGoals: locals.formData.allLearningGoals,
+			allLearningGoals: objlearningGoalArr,
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
 			resources_upload: locals.formData.resources_upload,
-			// participants: locals.formData.participants,
+			status: 'Created',
 		});
-		// console.log(newProject);
 		// console.log('Generating new PBL project.....');
 		var id = req.params.id;
 		// console.log(id);
@@ -60,11 +76,9 @@ exports = module.exports = function (req, res) {
 			Project.model.findById(id).exec(function (err, item) {
 				if (err) return res.apiError('database error', err);
 				if (!item) return res.apiError('not found');
-
-				var data = (req.method == 'POST') ? req.body : req.query;
-				data.createdBy = locals.user._id;
-				item.getUpdateHandler(req).process(data, function (err) {
-					// console.log(data);
+				console.log(item.allLearningGoals[1]);
+				item.getUpdateHandler(req).process(newProject, function (err) {
+					console.log(newProject.allLearningGoals[1]);
 				});
 				return res.redirect('/project/' + id);
 			});
@@ -87,18 +101,37 @@ exports = module.exports = function (req, res) {
 
 	// add participants into project
 	view.on('post', { action: 'project.participants' }, function (next) {
-		console.log(locals.formData);
+		// get participants string
+		var participants = locals.formData.participants;
+		// console.log(participants);
+		var arr = participants.split(',');
+		// console.log(arr[0]);
+		var i;
+		var participantsArr = [];
+		for (i = 0; i < arr.length; i++) {
+			participantsArr.push({ email: arr[i] });
+		}
+		var objparticipantsArr = JSON.stringify(participantsArr);
+
+		var newData = new Project.model({
+			// title: locals.formData.title,
+			// description: locals.formData.description,
+			createdBy: locals.user._id, // add user data
+			// allLearningGoals: locals.formData.allLearningGoals,
+			// file_name: locals.formData.file_name,
+			// uploaded_file_path: locals.formData.uploaded_file_path,
+			// resources_upload: locals.formData.resources_upload,
+			participants: objparticipantsArr,
+		});
 		// creating a new object for project data
 		var id = req.params.id;
-		console.log(id);
+		// console.log(id);
 		Project.model.findById(id).exec(function (err, item) {
-			var data = locals.formData;
-			data.createdBy = locals.user._id;
-			item.getUpdateHandler(req).process(data, function (err) {
-				console.log('new students added');
+			item.getUpdateHandler(req).process(newData, function (err) {
+				// console.log(newData);
 			});
 		});
-		next();
+		return res.redirect('/project/' + id);
 	});
 
 	// Render the view

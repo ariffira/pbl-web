@@ -80,9 +80,21 @@ function uploadMyFile () {
 }
 
 function addLearningGoals () {
-	var learningGoal = document.getElementById('inputlearningGoals').value;
-	$('#learningGoalList').append('<li>' + learningGoal + '</li>');
-	$('#learningGoalList').append('<input type="hidden" name="allLearningGoals" value="' + learningGoal + '">');
+	var goal = document.getElementById('inputlearningGoals').value;
+	$('#learningGoalList').append('<li>' + goal + '</li>');
+	/*
+	var goals = [{
+		content: goal
+	}];
+	*/
+	// goals = JSON.stringify(goals);
+	// goals = JSON.stringify('name');
+	/*
+	goals.push({
+		goal: goal
+	});
+	*/
+	$('#learningGoalList').append('<input type="hidden" name="allLearningGoals" value="' + goal + '">');
 }
 
 // selectize for multiple user choice
@@ -151,6 +163,15 @@ $(function () {
 				alert('Invalid email address.');
 				return false;
 			},
+		});
+		$('#select-assign-to').selectize({
+			options: result,
+			valueField: 'email',
+			labelField: 'name',
+			searchField: ['name', 'email'],
+			delimiter: ',',
+			create: false,
+			openOnFocus: false,
 		});
 	});
 });

@@ -1,5 +1,5 @@
 // @file collectResource.js
-// @path /routes/views/collectResource.js
+// @path /routes/views/CollectResource.js
 // @description add links, videos, web references, cite etc.
 // @author: MD Ariful Islam
 

@@ -25,11 +25,16 @@
 	<div class="form-group row">
 		<label for="learningGoals" class="col-sm-2 col-form-label">Learning Goals:</label>
 			<div class="col-sm-10">
-			<input type="text" name="learningGoal" value="{{ data.project.allLearningGoals }}" class="col-sm-8" id="inputlearningGoals" placeholder="Give List of Learning goals...">
+			<input type="text" name="learningGoal" class="col-sm-8" id="inputlearningGoals" placeholder="Give List of Learning goals...">
 			<input type="button" value="Add" class="btn btn-primary col-sm-2" onclick="addLearningGoals()">
 		</div>
 		<div class="col-sm-12">
 			<ul id="learningGoalList">
+				{{#if data.allLearningGoals}}
+					{{#each data.allLearningGoals}}
+					<li>{{goal}}</li>
+					{{/each}}
+				{{/if}}
 			</ul>
 		</div>
 	</div>
@@ -88,7 +93,7 @@
 		</div>
 	</div>
 </form>
-{{#if data.project.participants}}
+{{#if data.participants}}
 <!-- added student list-->
 <div class="form-group">
 	<div class="form-row">
@@ -96,19 +101,17 @@
 			<table class="table table-bordered">
 				<thead>
 				<tr>
-					<th scope="col">Name</th>
-					<th scope="col">Email</th>
+					<th scope="col">Added participants email:</th>
 				</tr>
 				</thead>
 				<tbody>
+				{{#each data.participants}}
 					<tr>
 						<td>
-							{{data.project.participants.name}}
-						</td>
-						<td>
-							{{data.project.participants}}
+							{{email}}
 						</td>
 					</tr>
+				{{/each}}
 				</tbody>
 			</table>
 		</div>
@@ -117,5 +120,8 @@
 </div>
 {{/if}}
 <hr>
-<a href="/project/generate"class="btn btn-success form-control col-sm-5">Generate Project</a>
+<div class="form-group row">
+	<label for="deadline" class="col-sm-2 col-form-label">Deadline:</label>
+</div>
+<a href="/projectGenerate"class="btn btn-success form-control col-sm-5">Generate Project</a>
 {{/if}}

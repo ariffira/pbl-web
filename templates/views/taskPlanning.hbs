@@ -1,31 +1,26 @@
-{{#if data.projects}}
-	<div class="form-group">
-		<div class="form-row">
-			<div class="col-md-12">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskModal">
-					Add Task
-				</button>
-			</div>
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-12">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskModal">
+				Add Task
+			</button>
 		</div>
 	</div>
-	{{#each data.projects}}
-	{{/each}}
-{{else}}
-	{{#ifeq user.role 'student' }}
+</div>
+{{#ifeq user.role 'student' }}
+<div class="form-group">
+	<div class="form-row">
+		<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+	</div>
+</div>
+{{/ifeq}}
+{{#ifeq user.role 'teacher' }}
 	<div class="form-group">
 		<div class="form-row">
-			<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+			<h5>You do not have any project yet. Please create project and add your students in the project then generate it</h5>
 		</div>
 	</div>
-	{{/ifeq}}
-	{{#ifeq user.role 'teacher' }}
-		<div class="form-group">
-			<div class="form-row">
-				<h5>You do not have any project yet. Please create project and add your students in the project then generate it</h5>
-			</div>
-		</div>
-	{{/ifeq}}
-{{/if}}
+{{/ifeq}}
 
 <!-- Modal for add Task -->
 <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
@@ -44,7 +39,7 @@
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-12">
-								<label>Task Title:</label>
+								<label for="taskTitle">Task Title:</label>
 								<input type="text" name="name" class="form-control" placeholder="Write a title for the task..">
 							</div>
 						</div>
@@ -52,8 +47,16 @@
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-12">
-								<label>Details:</label>
-								<input type="text" name="detail" class="form-control" placeholder="(Optional)">
+								<label for="taskDescription">Content:</label>
+								<textarea name="description" class="form-control" id="ideaGen" rows="3" placeholder="Give details about task">{{ data.project.description }}</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label for="assignTo">AssignTo:</label>
+								<input type="text" name="assignTo" class="form-control" id="select-assign-to" placeholder="Assign to..">
 							</div>
 						</div>
 					</div>
