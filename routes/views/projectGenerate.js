@@ -59,14 +59,6 @@ exports = module.exports = function (req, res) {
 				} else {
 					return res.redirect('/project');
 				}
-
-				/*
-				locals.data.project = result;
-				var participants = JSON.parse(result.participants);
-				var allLearningGoals = JSON.parse(result.allLearningGoals);
-				locals.data.participants = participants;
-				locals.data.allLearningGoals = allLearningGoals;
-				*/
 			});
 			next();
 		}

@@ -71,6 +71,7 @@ exports = module.exports = function (app) {
 	app.all('/collectResource', middleware.requirePblUser, routes.views.collectResource);
 	app.all('/learningAgenda', middleware.requirePblUser, routes.views.learningAgenda);
 	app.all('/documentation', middleware.requirePblUser, routes.views.documentation);
+	app.all('/documentation/:id/create', middleware.requirePblUser, routes.views.documentation.create);
 	app.all('/presentation', middleware.requirePblUser, routes.views.presentation);
 	app.get('/showcase', middleware.requirePblUser, routes.views.showcase);
 
