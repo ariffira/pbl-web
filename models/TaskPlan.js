@@ -9,9 +9,10 @@ var TaskPlan = new keystone.List('TaskPlan');
 
 TaskPlan.add({
 	title: { type: String, required: true, initial: true },
-	content: { type: Types.Markdown },
+	description: { type: Types.Textarea },
 	createdBy: { type: Types.Relationship, ref: 'User' },
-	assignTo: { type: Types.Relationship, ref: 'User' },
+	// assignTo: { type: Types.Relationship, ref: 'User' },
+	assignTo: { type: String },
 	projectId: { type: Types.Relationship, ref: 'Project' },
 	createdAt: { type: Date, default: Date.now },
 	publishedAt: Date,

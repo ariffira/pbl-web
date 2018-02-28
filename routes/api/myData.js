@@ -7,8 +7,9 @@ var MyStudent = keystone.list('MyStudent');
  * List of Students by createdBy(teacher)
  */
 exports.list = function (req, res) {
-	// var id = locals.user._id;
-	var id = '5a71a0ebc252020d4c127911';
+	var id = req.user.id;
+	// console.log(id);
+	// var id = '5a71a0ebc252020d4c127911';
 	var query = MyStudent.model.find();
 	query.where('createdBy', id);
 	query.exec(function (err, result) {

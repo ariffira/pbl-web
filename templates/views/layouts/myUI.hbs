@@ -175,19 +175,21 @@
 					<h6 class="dropdown-header">New Alerts:</h6>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#">
-              <span class="text-success" id="alertnotify">
+              <span class="text-success">
                 <strong>
                   <i class="fa fa-long-arrow-up fa-fw"></i>Project Update
 				</strong>
+				  <div id="alertnotify"></div>
               </span>
 						<span class="small float-right text-muted">11:21 AM</span>
-						<div class="dropdown-message small">5 Tasks are on doing condition for project: Advance agriculture by IOT technology.</div>
+						<div class="dropdown-message small">Title: 5 Tasks are on doing condition for project: Advance agriculture by IOT technology.</div>
 					</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#">
               <span class="text-danger">
                 <strong>
-                  <i class="fa fa-long-arrow-down fa-fw"></i>Waiting for Review</strong>
+                  <i class="fa fa-long-arrow-down fa-fw"></i>Waiting for Review
+				</strong>
               </span>
 						<span class="small float-right text-muted">11:21 AM</span>
 						<div class="dropdown-message small">Project: ePBL platform is waiting for your review. Please give a feedback.</div>
@@ -196,7 +198,9 @@
 					<a class="dropdown-item" href="#">
               <span class="text-success">
                 <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update
+				</strong>
+				  <div id="onProjectGenerate"></div>
               </span>
 						<span class="small float-right text-muted">11:21 AM</span>
 						<div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
@@ -317,6 +321,10 @@
 	<script src="/js/initSirTrevor.js"></script>
 	<!-- selectize js file -->
 	<script src="/selectize/js/selectize.js"></script>
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+	<script>
+		tinymce.init({ selector:'textarea' });
+	</script>
 	<!-- file upload api js file-->
 	<script src="/js/main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
@@ -324,7 +332,19 @@
 		var socket = io();
 		socket.on('notifytest', function(data)
 		{
-			document.getElementById('alertnotify').innerHTML = 'my first notification test';
+			document.getElementById('alertnotify').innerHTML = data.description;
+		});
+		socket.on('projectGenerate', function(data)
+		{
+			document.getElementById('onProjectGenerate').innerHTML = data.content;
+		});
+	</script>
+	<!-- tinymce file-->
+	<script src="/tinymce/tinymce.min.js"></script>
+	<script>
+		tinymce.init({
+			selector: '#documentContent',
+			height : 200,
 		});
 	</script>
 	{{{isPblEditorJS user}}}

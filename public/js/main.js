@@ -103,6 +103,7 @@ $(function () {
 	var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@'
 		+ '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 	$.get('/api/myData/list', function (result) {
+		var myStudent = result;
 		// console.log(result);
 		$('#participants').selectize({
 			persist: false,
@@ -117,7 +118,7 @@ $(function () {
 				{ email: 'someone@gmail.com', name: result[0].name },
 			],
 			*/
-			options: result,
+			options: myStudent,
 			render: {
 				item: function (item, escape) {
 					return '<div>'
@@ -164,15 +165,13 @@ $(function () {
 				return false;
 			},
 		});
-		$('#select-assign-to').selectize({
-			options: result,
-			valueField: 'email',
-			labelField: 'name',
-			searchField: ['name', 'email'],
-			delimiter: ',',
-			create: false,
-			openOnFocus: false,
-		});
+		// $('#select-assign-to').append('<option value="' + myStudent[0].name + '">' + myStudent[0].email + '</option>');
+		// for loop to add option in select for assign member list
+		var assignMembers = '';
+		for (var i = 0; i < myStudent.length; i++) {
+			assignMembers += '<option value="' + myStudent[i].email + '">' + myStudent[i].name + '(' + myStudent[i].email + ')' + '</option>';
+		}
+		$('#select-assign-to').append(assignMembers);
 	});
 });
 

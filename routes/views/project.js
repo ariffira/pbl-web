@@ -32,11 +32,14 @@ exports = module.exports = function (req, res) {
 				locals.data.project = result;
 				// console.log(result.allLearningGoals[0]);
 				var participants = JSON.parse(result.participants);
-				var allLearningGoals = JSON.parse(result.allLearningGoals);
-				// console.log(obj[0]);
 				locals.data.participants = participants;
-				locals.data.allLearningGoals = allLearningGoals;
-				// console.log(locals.data.project);
+				if (result.allLearningGoals) {
+					var allLearningGoals = JSON.parse(result.allLearningGoals);
+					locals.data.allLearningGoals = allLearningGoals;
+				}
+				else {
+					locals.data.allLearningGoals = result.allLearningGoals;
+				}
 			});
 			next();
 		}
@@ -47,23 +50,21 @@ exports = module.exports = function (req, res) {
 
 	// insert/update if id exist
 	view.on('post', { action: 'pbl.create' }, function (next) {
-		// console.log(req.params.id);
-		// console.log(locals.formData.allLearningGoals[1]);
-		var arr = locals.formData.allLearningGoals;
-		console.log(arr[0]);
-		var i;
-		var learningGoalArr = [];
-		for (i = 0; i < arr.length; i++) {
-			learningGoalArr.push({ goal: arr[i] });
+		if (locals.formData.allLearningGoals) {
+			var arr = locals.formData.allLearningGoals;
+			var i;
+			var learningGoalArr = [];
+			for (i = 0; i < arr.length; i++) {
+				learningGoalArr.push({ goal: arr[i] });
+			}
+			var objlearningGoalArr = JSON.stringify(learningGoalArr);
 		}
-		console.log(learningGoalArr[0]);
-		var objlearningGoalArr = JSON.stringify(learningGoalArr);
 		// creating a new object for project data
 		var newProject = new Project.model({
 			title: locals.formData.title,
 			description: locals.formData.description,
 			createdBy: locals.user._id, // add user data
-			allLearningGoals: objlearningGoalArr,
+			allLearningGoals: (objlearningGoalArr) ? objlearningGoalArr : '',
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
 			resources_upload: locals.formData.resources_upload,
@@ -76,9 +77,9 @@ exports = module.exports = function (req, res) {
 			Project.model.findById(id).exec(function (err, item) {
 				if (err) return res.apiError('database error', err);
 				if (!item) return res.apiError('not found');
-				console.log(item.allLearningGoals[1]);
+				// console.log(item.allLearningGoals[1]);
 				item.getUpdateHandler(req).process(newProject, function (err) {
-					console.log(newProject.allLearningGoals[1]);
+					// console.log(newProject.allLearningGoals[1]);
 				});
 				return res.redirect('/project/' + id);
 			});

@@ -9,7 +9,8 @@ var LearningAgenda = new keystone.List('LearningAgenda');
 
 LearningAgenda.add({
 	question: { type: String, required: true, initial: true },
-	// content: { type: Types.Markdown },
+	// answer: { type: String },
+	// reply: { type: String },
 	createdBy: { type: Types.Relationship, ref: 'User' },
 	answeredBy: { type: Types.Relationship, ref: 'User' },
 	projectId: { type: Types.Relationship, ref: 'Project' },

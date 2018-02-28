@@ -1,15 +1,46 @@
-{{#if data.projects}}
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-12">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLearningAgendaModel">
+				<i class="fa fa-fw fa-question-circle"></i> Add Question
+			</button>
+		</div>
+	</div>
+</div>
+{{#if data.learningAgenda}}
 	<div class="form-group">
 		<div class="form-row">
 			<div class="col-md-12">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addQuestionModal">
-					Add question
-				</button>
+				<table class="table table-bordered">
+					<caption>List of questions</caption>
+					<thead>
+					<tr>
+						<th scope="col">index</th>
+						<th scope="col">Question</th>
+						<th scope="col">Created By</th>
+						<th scope="col">Created At</th>
+					</tr>
+					</thead>
+					<tbody>
+					{{#each data.learningAgenda}}
+						<tr>
+							<th scope="row">{{@index}}</th>
+							<td>
+								{{question}}
+							</td>
+							<td>
+								{{createdBy}}
+							</td>
+							<td>
+								{{createdAt}}
+							</td>
+						</tr>
+					{{/each}}
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	{{#each data.projects}}
-	{{/each}}
 {{else}}
 	{{#ifeq user.role 'student' }}
 		<div class="form-group">
@@ -26,26 +57,25 @@
 		</div>
 	{{/ifeq}}
 {{/if}}
-
-<!-- Modal for add question -->
-<div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
+<!-- Modal for add learning agenda -->
+<div class="modal fade" id="addLearningAgendaModel" tabindex="-1" role="dialog" aria-labelledby="addLearningAgendaModelLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="addQuestionModalLabel">Add New learning Agenda</h5>
+				<h5 class="modal-title" id="addLearningAgendaModelLabel">Add Question</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<!-- add question form start -->
+				<!-- add learningAgenda form start -->
 				<form method="post">
-					<input type="hidden" name="action" value="add.question">
+					<input type="hidden" name="action" value="add.learningAgenda">
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-12">
-								<label>Question:</label>
-								<input type="text" name="name" class="form-control" placeholder="Write a title for the task..">
+								<label for="learningAgendaTitle">Your Question:</label>
+								<input type="text" name="question" class="form-control" placeholder="Write a question for the learningAgenda..?">
 							</div>
 						</div>
 					</div>
@@ -56,7 +86,7 @@
 						</div>
 					</div>
 				</form>
-				<!-- add question form end -->
+				<!-- add learningAgenda form end -->
 			</div>
 		</div>
 	</div>

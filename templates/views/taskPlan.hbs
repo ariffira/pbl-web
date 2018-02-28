@@ -2,17 +2,63 @@
 	<div class="form-row">
 		<div class="col-md-12">
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTaskModal">
-				Add Task
+				<i class="fa fa-fw fa-tasks"></i> Add Task
 			</button>
 		</div>
 	</div>
 </div>
-{{#ifeq user.role 'student' }}
-<div class="form-group">
-	<div class="form-row">
-		<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+{{#if data.tasks}}
+	<!-- task list table start -->
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-12">
+				<table class="table table-bordered">
+					<caption>List of Tasks</caption>
+					<thead>
+					<tr>
+						<th scope="col">index</th>
+						<th scope="col">Title</th>
+						<th scope="col">Content</th>
+						<th scope="col">Assigned To</th>
+						<th scope="col">Status</th>
+						<th scope="col">Options</th>
+					</tr>
+					</thead>
+					<tbody>
+					{{#each data.tasks}}
+						<tr>
+							<th scope="row">{{@index}}</th>
+							<td>
+								{{title}}
+							</td>
+							<td>
+								{{description}}
+							</td>
+							<td>
+								{{assignTo}}
+							</td>
+							<td>
+								{{status}}
+							</td>
+							<td>
+								<button type="button" class="btn btn-success">Detail</button>
+								<button type="button" class="btn btn-primary">Edit</button>
+							</td>
+						</tr>
+					{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- task list table end -->
 	</div>
-</div>
+{{else}}
+{{#ifeq user.role 'student' }}
+	<div class="form-group">
+		<div class="form-row">
+			<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+		</div>
+	</div>
 {{/ifeq}}
 {{#ifeq user.role 'teacher' }}
 	<div class="form-group">
@@ -21,7 +67,7 @@
 		</div>
 	</div>
 {{/ifeq}}
-
+{{/if}}
 <!-- Modal for add Task -->
 <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -35,12 +81,12 @@
 			<div class="modal-body">
 				<!-- add Task form start -->
 				<form method="post">
-					<input type="hidden" name="action" value="add.Task">
+					<input type="hidden" name="action" value="add.task">
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-12">
 								<label for="taskTitle">Task Title:</label>
-								<input type="text" name="name" class="form-control" placeholder="Write a title for the task..">
+								<input type="text" name="title" class="form-control" placeholder="Write a title for the task..">
 							</div>
 						</div>
 					</div>
@@ -48,7 +94,7 @@
 						<div class="form-row">
 							<div class="col-md-12">
 								<label for="taskDescription">Content:</label>
-								<textarea name="description" class="form-control" id="ideaGen" rows="3" placeholder="Give details about task">{{ data.project.description }}</textarea>
+								<textarea name="description" class="form-control" rows="3" placeholder="Give details about task"></textarea>
 							</div>
 						</div>
 					</div>
@@ -56,7 +102,9 @@
 						<div class="form-row">
 							<div class="col-md-12">
 								<label for="assignTo">AssignTo:</label>
-								<input type="text" name="assignTo" class="form-control" id="select-assign-to" placeholder="Assign to..">
+								<select type="assignTo" name="assignTo" class="form-control" id="select-assign-to">
+									<option value=" ">Assign to..</option>
+								</select>
 							</div>
 						</div>
 					</div>

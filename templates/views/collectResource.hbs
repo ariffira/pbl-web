@@ -1,15 +1,14 @@
-{{#if data.projects}}
-	<div class="form-group">
-		<div class="form-row">
-			<div class="col-md-12">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addResourceModal">
-					Add Resource
-				</button>
-			</div>
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-12">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addResourceModal">
+				<i class="fa fa-fw fa-sitemap"></i> Collect Resource
+			</button>
 		</div>
 	</div>
-	{{#each data.projects}}
-	{{/each}}
+</div>
+{{#if data.collectResource}}
+	<h1>Collected Resources</h1>
 {{else}}
 	{{#ifeq user.role 'student' }}
 		<div class="form-group">
@@ -26,7 +25,6 @@
 		</div>
 	{{/ifeq}}
 {{/if}}
-
 <!-- Modal for add Task -->
 <div class="modal fade" id="addResourceModal" tabindex="-1" role="dialog" aria-labelledby="addResourceModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -45,18 +43,19 @@
 						<div class="form-row">
 							<div class="col-md-12">
 								<label>Resource name:</label>
-								<input type="text" name="name" class="form-control" placeholder="Give a name..">
+								<input type="text" name="file_name" class="form-control" placeholder="Give a name..">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-12">
-								<label> Resource Type</label>
-								<select>
-									<option>Hyperlink/website</option>
-									<option>Video</option>
-									<option>Article</option>
+								<label for="resourceType">Resource Type</label>
+								<select type="resource_type" name="resource_type" class="form-control">
+									<option value="Website">Website/hyperlinks</option>
+									<option value="Video">Video</option>
+									<option value="Image">Picture</option>
+									<option value="Article">Article/book/Scientific paper</option>
 								</select>
 							</div>
 						</div>

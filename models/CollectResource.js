@@ -13,7 +13,7 @@ CollectResource.add({
 	projectId: { type: Types.Relationship, ref: 'Project' },
 	createdAt: { type: Date, default: Date.now },
 	// task_resources: { type: Types.Code, language: 'json' },
-	resource_type: { type: Types.Select, options: 'Website, Video, Image, Book, Article' },
+	resource_type: { type: Types.Select, options: 'Website, Video, Image, Article' },
 });
 
 /**

@@ -1,23 +1,47 @@
-<h5 style="text-align: center">Current Project: Basic Data</h5>
+<h5 style="text-align: center"><i class="fa fa-fw fa-wrench"></i>Current Project: Basic Data</h5>
 <div class="form-group row">
-	<label for="formTitle" class="col-sm-12 col-form-label">
-		<b>Project informations</b>
-	</label>
+	<label for="projecTitle" class="col-sm-2 col-form-label">Project Title: </label>	
+	<div class="col-sm-10">
+		<input class="form-control" type="text" placeholder="{{ data.project.title }}" readonly>
+		<!-- <input type="text" readonly class="form-control-plaintext" value="{{ data.project.title }}">-->
+	</div>
 </div>
 <div class="form-group row">
-	<label for="pblTitle" class="col-sm-2 col-form-label">Project Title: {{ data.project.title }}</label>
-</div>
-<div class="form-group row">
-	<label for="ideaDescription" class="col-md-2">Description: {{ data.project.description }}</label>
+	<label for="ideaDescription" class="col-sm-2 col-form-label">Description:</label>
+	<div class="col-sm-10">
+		<p class="form-control-static">{{ data.project.description }}</p>
+	</div>
 </div>
 <div class="form-group row">
 	<label for="learningGoals" class="col-sm-2 col-form-label">Learning Goals:</label>
+	<div class="col-sm-10">
+	<ul>
+		{{#if data.allLearningGoals}}
+			{{#each data.allLearningGoals}}
+				<li>{{goal}}</li>
+			{{/each}}
+		{{/if}}
+	</ul>
+	</div>
 </div>
 <div class="form-group row">
 	<label for="resources" class="col-sm-2 col-form-label">Resources:</label>
+	<div class="col-sm-10">
+		{{#ifeq data.project.resources_upload.data 'null'}}
+			<p>No resource added</p>
+		{{else}}
+			<!-- todo: render sirtrevor data using html/bootstrap as a blog post -->
+			<textarea name="resources_upload" class="form-control sir-trevor" id="file_upload">{{ data.project.resources_upload }}</textarea>
+		{{/ifeq}}
+	</div>
 </div>
 <div class="form-group row">
 	<label for="participants" class="col-sm-2 col-form-label">Participants:</label>
+	<ol>
+      {{#each data.participants}}
+		<li>{{email}}</li>  
+	  {{/each}}
+	</ol>
 </div>
 <div class="form-group row">
 	<label for="deadline" class="col-sm-2 col-form-label">Deadline:</label>

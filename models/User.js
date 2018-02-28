@@ -37,6 +37,7 @@ User.schema.virtual('canAccessDashboard').get(function () {
  */
 User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
 User.relationship({ ref: 'Project', path: 'projects', refPath: 'createdBy' });
+// User.relationship({ ref: 'TaskPlan', path: 'taskPlans', refPath: 'assignTo' });
 
 /**
  * Registration

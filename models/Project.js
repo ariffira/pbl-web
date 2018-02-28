@@ -22,6 +22,7 @@ Project.add({
 	participants: { type: Types.Code, language: 'json' },
 	// participants: { type: Types.Relationship, ref: 'MyStudent', many: true },
 	status: { type: Types.Select, options: 'Created, Running, Finished' },
+	notificationId: { type: Types.Relationship, ref: 'Notification' },
 });
 
 /**

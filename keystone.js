@@ -75,7 +75,8 @@ keystone.start(
 			// Whenever someone connects this gets executed
 			io.on('connection', function (socket) {
 				console.log('Socket message: A user connected.......');
-				socket.emit('notifytest', { description: 'A custom event named testerEvent!'});
+				socket.emit('notifytest', { description: 'A custom event named testerEvent!' });
+				socket.emit('projectGenerate', { content: 'A new Project is generated for you!' });
 				// Whenever someone disconnects this piece of code executed
 				socket.on('disconnect', function () {
 					console.log('Socket message: A user disconnected..........');

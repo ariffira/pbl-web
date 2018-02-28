@@ -26,15 +26,47 @@ exports = module.exports = function (req, res) {
 	   initial view of generated project
 	   todo: find project emails and send notifications to all emails with project id ,
 	   student only can access if his email is in the project list
+	   update:status: Generated
 	 */
 	view.on('init', function (next) {
+		console.log('Project generated.....');
 		if (req.params.id) {
-			Project.model.findById(req.params.id).populate('createdBy').exec(function (err, result) {
+			Project.model.findById(req.params.id).exec(function (err, result) {
+				if (result.status === 'Running') {
+					console.log('Running already...');
+					locals.data.project = result;
+					var participants = JSON.parse(result.participants);
+					var allLearningGoals = JSON.parse(result.allLearningGoals);
+					locals.data.participants = participants;
+					locals.data.allLearningGoals = allLearningGoals;
+				} else if (result.status === 'Created') {
+					result.set({ status: 'Running' });
+					result.save(function (err, newResult) {
+						console.log('Status of project updated to Running............');
+						if (err) {
+							console.log(err);
+						} else {
+							console.log(newResult);
+							locals.data.project = newResult;
+							var participants = JSON.parse(newResult.participants);
+							var allLearningGoals = JSON.parse(newResult.allLearningGoals);
+							locals.data.participants = participants;
+							locals.data.allLearningGoals = allLearningGoals;
+						}
+					});
+				} else if (result.status === 'Finished') {
+					return res.redirect('/projectFinished/' + req.params.id);
+				} else {
+					return res.redirect('/project');
+				}
+
+				/*
 				locals.data.project = result;
 				var participants = JSON.parse(result.participants);
 				var allLearningGoals = JSON.parse(result.allLearningGoals);
 				locals.data.participants = participants;
 				locals.data.allLearningGoals = allLearningGoals;
+				*/
 			});
 			next();
 		}
