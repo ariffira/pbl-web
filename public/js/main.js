@@ -175,4 +175,28 @@ $(function () {
 	});
 });
 
+/*
+// Socket io script start
+var socket = io();
+socket.on('notifytest', function(data)
+{
+	document.getElementById('alertnotify').innerHTML = data.description;
+});
+socket.on('projectGenerate', function(data)
+{
+	document.getElementById('onProjectGenerate').innerHTML = data.content;
+});
 
+$(function () {
+	var socket = io();
+	$('form').submit(function(){
+		socket.emit('chat message', $('#m').val());
+		$('#m').val('');
+		return false;
+	});
+	socket.on('chat message', function(msg){
+		$('#messages').append($('<li>').text(msg));
+	});
+});
+// Socket io script ends
+*/

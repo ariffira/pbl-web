@@ -179,7 +179,7 @@
                 <strong>
                   <i class="fa fa-long-arrow-up fa-fw"></i>Project Update
 				</strong>
-				  <div id="alertnotify"></div>
+				  <div id="onProjectGenerate"></div>
               </span>
 						<span class="small float-right text-muted">11:21 AM</span>
 						<div class="dropdown-message small">Title: 5 Tasks are on doing condition for project: Advance agriculture by IOT technology.</div>
@@ -324,20 +324,9 @@
 	<script>
 		tinymce.init({ selector:'textarea' });
 	</script>
-	<!-- file upload api js file-->
-	<script src="/js/main.js"></script>
+	<!-- socket.io cdn link -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-	<script>
-		var socket = io();
-		socket.on('notifytest', function(data)
-		{
-			document.getElementById('alertnotify').innerHTML = data.description;
-		});
-		socket.on('projectGenerate', function(data)
-		{
-			document.getElementById('onProjectGenerate').innerHTML = data.content;
-		});
-	</script>
+	<script src="/chat-notification/chat-notification.js"></script>
 	<!-- tinymce file-->
 	<script src="/tinymce/tinymce.min.js"></script>
 	<script>
@@ -346,6 +335,8 @@
 			height : 200,
 		});
 	</script>
+	<!-- main js file-->
+	<script src="/js/main.js"></script>
 	{{{isPblEditorJS user}}}
 </div>
 </body>

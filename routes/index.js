@@ -77,6 +77,14 @@ exports = module.exports = function (app) {
 
 	// my api
 	app.get('/api/myData/list', keystone.middleware.api, routes.api.myData.list);
+	app.all('/api/myData/:id/participants', keystone.middleware.api, routes.api.myData.participants);
+	app.all('/api/myData/addProjectId', keystone.middleware.api, routes.api.myData.addProjectId);
+	app.all('/api/myData/:id/projectGenerateNotification', keystone.middleware.api, routes.api.myData.projectGenerateNotification);
+
+	// chat service
+	app.all('/chat-notification', middleware.requirePblUser, routes.views.chatme);
+	app.all('/chatme', middleware.requirePblUser, routes.views.chatme);
+
 
 	// File Upload Route
 	app.get('/api/fileupload/list', keystone.middleware.api, routes.api.fileupload.list);

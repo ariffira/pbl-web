@@ -11,7 +11,7 @@ Notification.add({
 	content: { type: String, required: true, initial: true },
 	createdAt: { type: Date, default: Date.now },
 	status: { type: Types.Select, options: 'Read, Unread' },
-	flowExperience: { type: Types.Select, options: 'on, off' },
+	projectId: { type: Types.Relationship, ref: 'Project' },
 });
 
 /**

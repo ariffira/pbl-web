@@ -26,6 +26,11 @@ Project.add({
 });
 
 /**
+ * Relationships
+ */
+Project.relationship({ ref: 'User', path: 'users', refPath: 'projectId' });
+
+/**
  * page registration
  */
 // default columns
