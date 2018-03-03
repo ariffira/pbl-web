@@ -1,5 +1,5 @@
 // @file projectGenerate.js
-// @path /routes/views/projectGenerate.hbs.js
+// @path /routes/views/currentProject.hbs.js
 // @description show all project data, insert status = Generated, show participants list and deadline
 // @author: MD Ariful Islam
 
@@ -30,8 +30,9 @@ exports = module.exports = function (req, res) {
 	 */
 	view.on('init', function (next) {
 		console.log('Project generated.....');
-		if (req.params.id) {
-			Project.model.findById(req.params.id).exec(function (err, result) {
+		var projectId = req.params.id;
+		if (projectId) {
+			Project.model.findById(projectId).exec(function (err, result) {
 				if (result.status === 'Running') {
 					console.log('Running already...');
 					locals.data.project = result;
@@ -68,5 +69,5 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Render the view
-	view.render('projectGenerate', { layout: 'myUI' });
+	view.render('currentProject', { layout: 'myUI' });
 };

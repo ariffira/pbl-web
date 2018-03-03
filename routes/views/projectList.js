@@ -22,12 +22,15 @@ exports = module.exports = function (req, res) {
 
 	// initial view  and after insert view of project
 	view.on('init', function (next) {
-		console.log('List of Projects');
-		Project.model.find().exec(function (err, result) {
+		console.log('List of Projects created by teacher');
+		// find all projects where createdBy = teacher Id
+		var id = locals.user._id;
+		var query = Project.model.find();
+		query.where('createdBy', id);
+		query.exec(function (err, result) {
 			locals.data.projects = result;
-			console.log(result);
+			next();
 		});
-		next();
 	});
 
 	// Render the view

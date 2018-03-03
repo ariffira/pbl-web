@@ -165,38 +165,23 @@ $(function () {
 				return false;
 			},
 		});
-		// $('#select-assign-to').append('<option value="' + myStudent[0].name + '">' + myStudent[0].email + '</option>');
-		// for loop to add option in select for assign member list
-		var assignMembers = '';
-		for (var i = 0; i < myStudent.length; i++) {
-			assignMembers += '<option value="' + myStudent[i].email + '">' + myStudent[i].name + '(' + myStudent[i].email + ')' + '</option>';
-		}
-		$('#select-assign-to').append(assignMembers);
 	});
+	// for loop to add option in select for assign member list from a project participants
+	// get project participants
+	$('#select-assign-to').click(function () {
+		var projectId = $(this).data('id');
+		$.get('/api/myData/' + projectId + '/participants', function (participants) {
+			var participants = JSON.parse(participants);
+			// alert(participants[0].email);
+			var assignMembers = '';
+			for (var i = 0; i < participants.length; i++) {
+				assignMembers += '<option value="' + participants[i].email + '">' + participants[i].email + '</option>';
+			}
+			$('#select-assign-to').append(assignMembers);
+		});
+	});
+	/*
+
+	*/
 });
 
-/*
-// Socket io script start
-var socket = io();
-socket.on('notifytest', function(data)
-{
-	document.getElementById('alertnotify').innerHTML = data.description;
-});
-socket.on('projectGenerate', function(data)
-{
-	document.getElementById('onProjectGenerate').innerHTML = data.content;
-});
-
-$(function () {
-	var socket = io();
-	$('form').submit(function(){
-		socket.emit('chat message', $('#m').val());
-		$('#m').val('');
-		return false;
-	});
-	socket.on('chat message', function(msg){
-		$('#messages').append($('<li>').text(msg));
-	});
-});
-// Socket io script ends
-*/

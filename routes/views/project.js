@@ -5,6 +5,7 @@
 
 var keystone = require('keystone');
 var Project = keystone.list('Project');
+var User = keystone.list('User');
 
 exports = module.exports = function (req, res) {
 
@@ -30,9 +31,13 @@ exports = module.exports = function (req, res) {
 			// console.log('successfully create new project...');
 			Project.model.findById(req.params.id).populate('createdBy').exec(function (err, result) {
 				locals.data.project = result;
-				// console.log(result.allLearningGoals[0]);
-				var participants = JSON.parse(result.participants);
-				locals.data.participants = participants;
+				if (result.participants) {
+					var participants = JSON.parse(result.participants);
+					locals.data.participants = participants;
+				}
+				else {
+					locals.data.participants = '';
+				}
 				if (result.allLearningGoals) {
 					var allLearningGoals = JSON.parse(result.allLearningGoals);
 					locals.data.allLearningGoals = allLearningGoals;
@@ -59,11 +64,12 @@ exports = module.exports = function (req, res) {
 			}
 			var objlearningGoalArr = JSON.stringify(learningGoalArr);
 		}
+		var userId = locals.user._id;
 		// creating a new object for project data
 		var newProject = new Project.model({
 			title: locals.formData.title,
 			description: locals.formData.description,
-			createdBy: locals.user._id, // add user data
+			createdBy: userId, // add user data
 			allLearningGoals: (objlearningGoalArr) ? objlearningGoalArr : '',
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
@@ -93,6 +99,14 @@ exports = module.exports = function (req, res) {
 					req.flash('success', { success: 'A new Project data saved successfully' });
 					locals.projectSubmitted = true;
 					// console.log(result);
+					// insert this project in user model of teacher
+					User.model.findById(userId).exec(function (err, item) {
+						// set only projectId to insert in user model
+						item.projectId = result._id;
+						item.save(function () {
+							// console.log('project Id added');
+						});
+					});
 					return res.redirect('/project/' + result._id);
 				}
 				next();

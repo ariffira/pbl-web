@@ -65,7 +65,7 @@ exports = module.exports = function (app) {
 	app.get('/myProfile', middleware.requirePblUser, routes.views.myProfile);
 	app.all('/project', middleware.requirePblUser, routes.views.project);
 	app.all('/project/:id', middleware.requirePblUser, routes.views.project);
-	app.get('/projectGenerate/:id', middleware.requirePblUser, routes.views.projectGenerate);
+	app.get('/currentProject/:id', middleware.requirePblUser, routes.views.currentProject);
 	app.get('/projectList', middleware.requirePblUser, routes.views.projectList);
 	app.all('/taskPlan', middleware.requirePblUser, routes.views.taskPlan);
 	app.all('/collectResource', middleware.requirePblUser, routes.views.collectResource);

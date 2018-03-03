@@ -40,6 +40,14 @@
 					<span class="nav-link-text">PBL Dashboard</span>
 				</a>
 			</li>
+			{{#if user.projectId}}
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Current Project">
+				<a class="nav-link" href="/currentProject/{{user.projectId}}">
+					<i class="fa fa-fw fa-clipboard"></i>
+					<span class="nav-link-text">Current Project</span>
+				</a>
+			</li>
+			{{/if}}
 			<!-- If user role as teacher than can manage students and team-->
 			{{#ifeq user.role 'teacher' }}
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Student Management">
