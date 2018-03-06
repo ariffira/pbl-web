@@ -1,14 +1,93 @@
-<div class="form-group">
-	<div class="form-row">
-		<div class="col-md-12">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addResourceModal">
-				<i class="fa fa-fw fa-sitemap"></i> Collect Resource
-			</button>
+<form method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="add.collection">
+	<div class="form-group row">
+		<label for="formTitle" class="col-sm-12 col-form-label">
+			<b><i class="fa fa-fw fa-sitemap"></i>Resource Collection Form: Please fill and add resources by this form</b>
+		</label>
+	</div>
+	<hr>
+	<div class="form-group row">
+		<label for="resource_name" class="col-sm-2 col-form-label">Resource name:</label>
+		<div class="col-sm-6">
+			<input type="text" name="resource_name" class="form-control" placeholder="Give a name..">
 		</div>
 	</div>
-</div>
-{{#if data.collectResource}}
-	<h1>Collected Resources</h1>
+	<div class="form-group row">
+		<label for="resource_type" class="col-sm-2 col-form-label">Resource Type:</label>
+		<div class="col-sm-6">
+			<select type="resource_type" name="resource_type" class="form-control" id="resourceSelect" onchange="myCollection()">
+				<option value="">Select a Type...</option>
+				<option value="Website">Website/hyperlinks</option>
+				<option value="Video">Video</option>
+				<option value="Image">Picture</option>
+				<option value="Article">Article/book/Scientific paper</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group row" id="selectionType"></div>
+	<div class="form-group row">
+		<div class="col-sm-10">
+			<button type="submit" class="btn btn-primary">Save Resource</button>
+			<button type="reset" class="btn btn-primary">Cancel</button>
+		</div>
+	</div>
+</form>
+<hr>
+{{#if data}}
+	<h5 style="text-align: center"><i class="fa fa-fw fa-sitemap"></i>Collected Resources:</h5>
+	<hr>
+	{{#if data.website}}
+	<h1 style="text-align: center"><i class="fa fa-fw fa-link"></i>Website/hyperlinks:</h1>
+	{{#each data.website}}
+		<div class="form-group row">
+		<div class="col-sm-10">
+			<ul>
+				<li><a href="{{ webUrlResource }}">{{ resource_name }}</a>, Added By: {{ createdBy.name.first }} {{ createdBy.name.last }}</li>
+			</ul>
+		</div>
+	    </div>
+	{{/each}}
+		<hr>
+	{{/if}}
+	{{#if data.article}}
+		<h1 style="text-align: center"><i class="fa fa-fw fa-book"></i>Article/Book/Scientific paper links:</h1>
+		{{#each data.article}}
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<input class="form-control" type="text" placeholder="{{ articleResource }}" readonly>
+			</div>
+		</div>
+	{{/each}}
+		<hr>
+	{{/if}}
+	{{#if data.image}}
+		<h1 style="text-align: center"><i class="fa fa-fw fa-picture-o"></i>Images:</h1>
+		{{#each data.image}}
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<input class="form-control" type="text" placeholder="{{ photoResource }}" readonly>
+			</div>
+		</div>
+	{{/each}}
+		<hr>
+	{{/if}}
+	{{#if data.video}}
+		<h1 style="text-align: center"><i class="fa fa-fw fa-video-camera"></i>Videos:</h1>
+		{{#each data.video}}
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<input class="form-control" type="text" placeholder="{{ videoResource }}" readonly>
+			</div>
+		</div>
+	{{/each}}
+		<hr>
+	{{/if}}
+{{else if user.projectId}}
+	<div class="form-group">
+		<div class="form-row">
+			<h5>No collection of resource added yet. Please add some.</h5>
+		</div>
+	</div>
 {{else}}
 	{{#ifeq user.role 'student' }}
 		<div class="form-group">
@@ -25,50 +104,3 @@
 		</div>
 	{{/ifeq}}
 {{/if}}
-<!-- Modal for add Task -->
-<div class="modal fade" id="addResourceModal" tabindex="-1" role="dialog" aria-labelledby="addResourceModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="addResourceModalLabel">Add Resource</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<!-- add Resource form start -->
-				<form method="post">
-					<input type="hidden" name="action" value="add.Resource">
-					<div class="form-group">
-						<div class="form-row">
-							<div class="col-md-12">
-								<label>Resource name:</label>
-								<input type="text" name="file_name" class="form-control" placeholder="Give a name..">
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="form-row">
-							<div class="col-md-12">
-								<label for="resourceType">Resource Type</label>
-								<select type="resource_type" name="resource_type" class="form-control">
-									<option value="Website">Website/hyperlinks</option>
-									<option value="Video">Video</option>
-									<option value="Image">Picture</option>
-									<option value="Article">Article/book/Scientific paper</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="form-actions">
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Add</button>
-						</div>
-					</div>
-				</form>
-				<!-- add Resource form end -->
-			</div>
-		</div>
-	</div>
-</div>

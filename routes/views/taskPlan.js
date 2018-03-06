@@ -71,3 +71,60 @@ exports = module.exports = function (req, res) {
 	// Render the view
 	view.render('taskPlan', { layout: 'myUI' });
 };
+
+/**
+ *  Details of a task plan
+ */
+exports.detailTaskPlan = function (req, res) {
+	var view = new keystone.View(req, res);
+	var locals = res.locals;
+
+	// locals.section is used to set the currently selected
+	locals.section = 'Detail Task Planning';
+	locals.formData = req.body || {};
+	locals.validationErrors = {};
+	locals.data = {
+		tasks: [],
+	};
+    // Detail of a taskPlan by its Id
+	view.on('init', function (next) {
+		console.log('Details of a Task Planning');
+		var taskId = req.params.id;
+		// console.log(taskId);
+		var query = TaskPlan.model.findById(taskId);
+		query.exec(function (err, result) {
+			locals.data.tasks = result;
+			// console.log(result);
+			next();
+		});
+	});
+
+	// Update task
+	view.on('post', { action: 'update.task' }, function (next) {
+		// updating task data
+		var taskId = locals.formData.id;
+		// console.log(taskId);
+		TaskPlan.model.findById(taskId).exec(function (err, result) {
+			console.log(result);
+			result.set({
+				title: locals.formData.title,
+				description: locals.formData.description,
+				assignTo: locals.formData.assignTo,
+				// status: locals.formData.status,
+			});
+			result.save(function (err, newResult) {
+				console.log('Task plan updated...........');
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(newResult);
+					locals.data.tasks = newResult;
+					return res.redirect('/taskPlan/' + newResult._id + '/detailTaskPlan');
+				}
+			});
+		});
+	});
+
+	// Render the view
+	view.render('detailTaskPlan', { layout: 'myUI' });
+};

@@ -1,0 +1,33 @@
+<form method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="update.task">
+	<input type="hidden" name="id" value="{{data.tasks._id}}">
+	<h5 style="text-align: center"><i class="fa fa-fw fa-tasks"></i>Task Plan Details</h5>
+
+	<div class="form-group row">
+		<label for="taskTitle" class="col-sm-2 col-form-label">Task Title:</label>
+		<div class="col-sm-10">
+			<input class="form-control" name="title" type="text" value="{{ data.tasks.title }}">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="taskDescription" class="col-sm-2 col-form-label">Content:</label>
+		<div class="col-sm-10">
+			<textarea name="description" class="form-control" rows="3">{{data.tasks.description}}</textarea>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="assignTo" class="col-sm-2 col-form-label">Assigned To:</label>
+		<div class="col-sm-10">
+			<select type="assignTo" name="assignTo" class="form-control" id="select-assign-to" data-id="{{user.projectId}}">
+				<option value="{{data.tasks.assignTo}}">{{data.tasks.assignTo}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-actions">
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</div>
+	</div>
+</form>
+<!-- add Task form end -->

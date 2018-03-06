@@ -68,6 +68,7 @@ exports = module.exports = function (app) {
 	app.get('/currentProject/:id', middleware.requirePblUser, routes.views.currentProject);
 	app.get('/projectList', middleware.requirePblUser, routes.views.projectList);
 	app.all('/taskPlan', middleware.requirePblUser, routes.views.taskPlan);
+	app.all('/taskPlan/:id/detailTaskPlan', middleware.requirePblUser, routes.views.taskPlan.detailTaskPlan);
 	app.all('/collectResource', middleware.requirePblUser, routes.views.collectResource);
 	app.all('/learningAgenda', middleware.requirePblUser, routes.views.learningAgenda);
 	app.all('/documentation', middleware.requirePblUser, routes.views.documentation);

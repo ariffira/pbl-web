@@ -24,7 +24,6 @@ exports = module.exports = function (req, res) {
 
 	/*
 	   initial view of generated project
-	   todo: find project emails and send notifications to all emails with project id ,
 	   student only can access if his email is in the project list
 	   update:status: Generated
 	 */

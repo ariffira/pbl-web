@@ -180,8 +180,39 @@ $(function () {
 			$('#select-assign-to').append(assignMembers);
 		});
 	});
-	/*
-
-	*/
 });
 
+// on resource type selection show the field
+function myCollection() {
+	var selectedValue = document.getElementById('resourceSelect').value;
+	switch (selectedValue) {
+		case 'Website':
+			document.getElementById('selectionType').innerHTML = '' +
+				'<label for="webUrlResource" class="col-sm-2 col-form-label">Website/hyperlink/url:</label>' +
+				'<div class="col-sm-6">' +
+				'<input type="text" name="webUrlResource" class="form-control" placeholder="paste a website/hyperlinks related to your project...">' +
+				'</div>';
+			break;
+		case 'Article':
+			document.getElementById('selectionType').innerHTML = '\t\t<label for="articleResource" class="col-sm-2 col-form-label">Article/Book/Scientific Paper:</label>\n' +
+				'\t\t<div class="col-sm-6">\n' +
+				'\t\t\t<input type="text" name="articleResource" class="form-control" placeholder="Add a Scientific paper/article/book references..">\n' +
+				'\t\t</div>';
+			break;
+		case 'Video':
+			document.getElementById('selectionType').innerHTML = '\t\t<label for="videoResource" class="col-sm-2 col-form-label">Upload a Video:</label>\n' +
+				'\t\t<div class="col-sm-6">\n' +
+				'\t\t\t<input type="text" name="videoResource" class="form-control" placeholder="Give a name..">\n' +
+				'\t\t</div>';
+			break;
+		case 'Image':
+			document.getElementById('selectionType').innerHTML = '\t\t<label for="photoResource" class="col-sm-2 col-form-label">Upload a Picture:</label>\n' +
+				'\t\t<div class="col-sm-6">\n' +
+				'\t\t\t<input type="text" name="photoResource" class="form-control" placeholder="">\n' +
+				'\t\t</div>';
+			break;
+		default:
+			document.getElementById('selectionType').innerHTML = '<p>Please select A Type</p>';
+	}
+
+}
