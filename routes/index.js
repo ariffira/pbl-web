@@ -71,6 +71,8 @@ exports = module.exports = function (app) {
 	app.all('/taskPlan/:id/detailTaskPlan', middleware.requirePblUser, routes.views.taskPlan.detailTaskPlan);
 	app.all('/collectResource', middleware.requirePblUser, routes.views.collectResource);
 	app.all('/learningAgenda', middleware.requirePblUser, routes.views.learningAgenda);
+	app.all('/learningAgenda/:id/detailLearningAgenda', middleware.requirePblUser, routes.views.learningAgenda.detailLearningAgenda);
+	app.all('/learningAgenda/addLearningAgendaAnswer', middleware.requirePblUser, routes.views.learningAgenda.addLearningAgendaAnswer);
 	app.all('/documentation', middleware.requirePblUser, routes.views.documentation);
 	app.all('/documentation/:id/create', middleware.requirePblUser, routes.views.documentation.create);
 	app.all('/presentation', middleware.requirePblUser, routes.views.presentation);

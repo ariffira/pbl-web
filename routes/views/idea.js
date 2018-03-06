@@ -37,6 +37,7 @@ exports = module.exports = function (req, res) {
 	});
 
 	view.on('post', { action: 'idea.generate' }, function (next) {
+		// Todo: add projectId to idea generate if project Id exist else save without projectId
 		// console.log(locals.formData.file_upload);
 		// creating a new object for project data
 		var newIdea = new Idea.model({

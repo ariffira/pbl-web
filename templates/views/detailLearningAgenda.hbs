@@ -1,0 +1,40 @@
+<h5 style="text-align: center"><i class="fa fa-fw fa-question-circle"></i>LearningAgenda Details</h5>
+<div class="form-group row">
+	<label for="question" class="col-sm-2 col-form-label">Question:</label>
+	<div class="col-sm-10">
+		<input class="form-control" name="question" type="text" value="{{ data.learningAgenda.question }}">
+	</div>
+</div>
+{{#if data.learningAgendaAnswer}}
+	{{#each data.learningAgendaAnswer}}
+		<div class="form-group row">
+			<label for="answer" class="col-sm-2 col-form-label">Answer:</label>
+			<div class="col-sm-10">
+				<input class="form-control" name="answer" type="text" value="{{answer}}">
+			</div>
+		</div>
+	{{/each}}
+{{/if}}
+<div class="form-group row" id="answerLink">
+	<hr class="my-0">
+	<div class="card-body py-2 col-sm-10">
+		<a class="mr-3 d-inline-block" href="#" id="hideLink">
+			<i class="fa fa-fw fa-comment"></i>Answer
+		</a>
+	</div>
+</div>
+<form action="/learningAgenda/addLearningAgendaAnswer" method="post">
+	<input type="hidden" name="questionId" value="{{ data.learningAgenda._id }}">
+	<div class="form-group row" style="display: none" id="answerInput">
+		<label for="answer" class="col-sm-2 col-form-label">Answer:</label>
+		<div class="col-sm-10">
+			<input class="form-control" name="answer" type="text">
+		</div>
+		<div class="form-actions col-sm-12">
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Answer</button>
+			</div>
+		</div>
+	</div>
+</form>

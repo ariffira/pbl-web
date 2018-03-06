@@ -207,8 +207,8 @@ function myCollection() {
 			break;
 		case 'Image':
 			document.getElementById('selectionType').innerHTML = '\t\t<label for="photoResource" class="col-sm-2 col-form-label">Upload a Picture:</label>\n' +
-				'\t\t<div class="col-sm-6">\n' +
-				'\t\t\t<input type="text" name="photoResource" class="form-control" placeholder="">\n' +
+				'\t\t<div class="col-sm-10">\n' +
+				'\t\t\t<textarea name="photoResource" class="form-control sir-trevor-image-upload"></textarea>\n' +
 				'\t\t</div>';
 			break;
 		default:
@@ -216,3 +216,10 @@ function myCollection() {
 	}
 
 }
+
+// onclick show answer input section
+$('#hideLink').click(function(){
+	$('#answerLink').hide();
+	$('#answerInput').show();
+});
+
