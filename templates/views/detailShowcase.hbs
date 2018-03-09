@@ -1,0 +1,46 @@
+<form method="post">
+	<input type="hidden" name="action" value="update.showcase">
+	<input type="hidden" name="id" value="{{data.showcase._id}}">
+	<div class="form-group">
+		<div class="form-row">
+			<label for="showcaseTitle" class="col-md-2">Showcase Title:</label>
+			<div class="col-md-10">
+				<input type="text" name="title" class="form-control" value="{{data.showcase.title}}">
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-row">
+			<label for="showcaseContent" class="col-md-2">Showcase Details</label>
+			<div class="col-md-10">
+				<textarea name="showcase_content" class="form-control" rows="3">{{data.showcase.showcase_content}}</textarea>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-row">
+			{{#if data.showcase.uploaded_file_path}}
+			<div class="col-md-12">
+				<img class="card-img-top img-fluid w-100" src="{{data.showcase.uploaded_file_path}}" alt="showcaseImage">
+			</div>
+			{{/if}}
+			<div class="col-md-12">
+				<label for="showcasePicture"><i class="fa fa-fw fa-image"></i></label>
+				<input type="file" name="file_upload" id="file_upload">
+				<label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
+				<input type="button" value="Change Picture" class="btn btn-primary" onclick="uploadMyFile()">
+				<div id="new_path"></div>
+			</div>
+			<div class="col-sm-2">
+				<ul id="file_list">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="form-actions">
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary">Update</button>
+		</div>
+	</div>
+</form>

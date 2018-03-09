@@ -1,4 +1,12 @@
-<h5 style="text-align: center"><i class="fa fa-fw fa-area-chart"></i> Project Artefact Presentation</h5>
+<h5 style="text-align: center">
+	<i class="fa fa-fw fa-area-chart"></i> Project Artefact Presentation
+</h5>
+<div class="form-group row">
+	<div class="col-sm-5">
+		<a href="#" class="btn btn-success"><i class="fa fa-fw fa-file-pdf-o"></i>Export as Pdf</a>
+		<a href="/presentation/addArtefact" class="btn btn-primary"><i class="fa fa-fw fa-plus-square"></i>Add Artefact Files</a>
+	</div>
+</div>
 <hr>
 <div class="container">
 	<h6><i class="fa fa-fw fa-pencil"></i>Project Basic Data: Driving Question:</h6>
@@ -40,52 +48,127 @@
 	</div>
 </div>
 <hr>
+{{#if data.tasks}}
 <div class="container">
 	<h6><i class="fa fa-fw fa-tasks"></i>Project Tasks:</h6>
 	<hr>
+	<ul>
     {{#each data.tasks}}
-		Task number: {{title}}
+		<li>
+			Task number {{inc @index}}: <a href="/taskPlan/{{_id}}/detailTaskPlan">{{title}}</a> ( Created By: {{ createdBy.name.first }} {{ createdBy.name.last }} )
+		</li>
 	{{/each}}
+	</ul>
 </div> 
+{{/if}}
 <hr>
-<div class="container">
-	<h6><i class="fa fa-fw fa-gift"></i>Project Outcome/Artefact:</h6>
-	<hr>
-	<form method="post" enctype="multipart/form-data">
-		<input type="hidden" name="action" value="add.presentation">
+{{#if data.presentationFiles}}
+	<h6 style="text-align: center"> Artefacts (Image, Video, Outcome List)</h6></label>
+	{{#each data.presentationFiles}}
 		<div class="form-group row">
-			{{#if data.project.uploaded_file_path}}
-			 <label for="pblImage" class="col-sm-2 col-form-label">Uploaded files (click to download):</label>
-			 <div class="col-sm-10">
-				 <ul>
-					 <li><a href="{{data.project.uploaded_file_path}}">{{data.project.file_name}}</a></li>
-				 </ul>
-			 </div>
-		 {{else}}
-			 <label for="pblImage" class="col-sm-2 col-form-label">Upload Files (ppt,pdf,doc etc.):</label>
-			 <div class="col-sm-8">
-				 <input type="file" name="file_upload" id="file_upload">
-				 <label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
-				 <input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
-				 <div id="new_path"></div>
-				 <br>
-			 </div>
-			 <div class="col-sm-2">
-				 <ul id="file_list">
-				 </ul>
-			 </div>
-		 {{/if}}
-		</div>
-		<div class="form-group">
-			<label for="resources_upload" class="col-md-12"><h6 style="text-align: center"> Add Artefacts (Image, Video, Outcome List)</h6></label>
-			<div class="col-sm-10">
-				<textarea name="resources_upload" class="form-control sir-trevor" id="file_upload">{{ data.presentation.resources_upload }}</textarea>
+			<div class="col-sm-12">
+				<textarea name="resources_upload" class="form-control sir-trevor" id="file_upload">{{resources_upload}}</textarea>
 			</div>
 		</div>
 		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Files:<i class="fa fa-fw fa-download"></i></label>
 			<div class="col-sm-10">
-				<button type="submit" class="btn btn-primary">Save All</button>
+				<ul>
+					<li><a href="{{uploaded_file_path}}">File Name: {{file_name}}</a></li>
+				</ul>
 			</div>
 		</div>
-    </form>
+	{{/each}}
+{{/if}}
+<hr>
+<!-- project feedback section by teacher's final feedback on the project and students individual feedback -->
+<h5 style="text-align: center">
+	<i class="fa fa-fw fa-comment"></i>Project FeedBacks:
+</h5>
+<!-- Add feedback button as Modal -->
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-6">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFeedbackModal">
+				<i class="fa fa-fw fa-commenting"></i>Add FeedBacks
+			</button>
+		</div>
+	</div>
 </div>
+<!-- Feedback data if already have some-->
+<div class="form-group">
+    {{#if data.feedback}}
+		{{#each data.feedback}}
+		{{#ifeq createdBy.role 'teacher' }}
+		<div class="form-row">
+			<label for="feedbackTeacher" class="col-sm-2 col-form-label">
+				FeedBack By Teacher:
+				{{ createdBy.name.first }} {{ createdBy.name.last }}
+			</label>
+			<div class="col-sm-10">
+				<textarea name="feedback_content" class="form-control" rows="3" readonly>{{feedback_content}}</textarea>
+			</div>
+		</div>
+		{{/ifeq}}
+		{{#ifeq createdBy.role 'student' }}
+		<div class="form-row">
+			<label for="feedbackStudent" class="col-sm-12 col-form-label">
+				<i class="fa fa-fw fa-comments"></i>FeedBack By Students
+			</label>
+		</div>
+		<div class="form-row">
+			<label for="feedbackContent" class="col-sm-2 col-form-label">
+				By: {{ createdBy.name.first }} {{ createdBy.name.last }}
+			</label>
+			<div class="col-sm-10">
+				<textarea name="feedback_content" class="form-control" rows="3" readonly>{{feedback_content}}</textarea>
+			</div>
+		</div>
+		{{/ifeq}}
+		{{/each}}
+	{{/if}}
+</div>
+<!-- Feedback data ends-->
+
+<!-- Modal for add feedback start -->
+<div class="modal fade" id="addFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addFeedbackModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addFeedbackModalLabel">Add Your Feedback on the Project Outcome</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- add feedback form start -->
+				<form method="post" action="/presentation/addFeedback">
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								{{#ifeq user.role 'student' }}
+										<label>Your Feedback as Student:</label>
+										<textarea name="feedback_content" class="form-control" rows="3" placeholder="Write about thought....what did you learn? how was this project? Give a short summary."></textarea>
+								{{/ifeq}}
+                                {{#ifeq user.role 'teacher' }}
+									<label>Your Feedback as Teacher:</label>
+									<textarea name="feedback_content" class="form-control" rows="3" placeholder="As a Teacher give some feedback on the project output/artefact made by students. Give your review so they could change it and represent again."></textarea>
+								{{/ifeq}}
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Add feedback</button>
+						</div>
+					</div>
+				</form>
+				<!-- add feedback form end -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal for add feedback Ends -->
+
+

@@ -222,4 +222,8 @@ $('#hideLink').click(function(){
 	$('#answerLink').hide();
 	$('#answerInput').show();
 });
+// onclick show/hide toggle add presentation form
+$('#toggleLink').click(function(){
+	$('#addFileForm').toggle();
+});
 

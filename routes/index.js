@@ -58,33 +58,49 @@ exports = module.exports = function (app) {
 	app.all('/signIn', routes.views.session.signIn);
 	app.all('/signOut', routes.views.session.signOut);
 	// Protected routes for login Users
+	// dashboard routes
 	app.get('/dashboard', middleware.requirePblUser, routes.views.dashboard);
+	// idea generation routes
 	app.all('/idea', middleware.requirePblUser, routes.views.idea);
 	app.all('/idea/:id', middleware.requirePblUser, routes.views.idea);
+	app.all('/idea/detailIdea/:id', middleware.requirePblUser, routes.views.idea.detailIdea);
+	// student management routes
 	app.all('/myStudent', middleware.requirePblUser, routes.views.myStudent);
+	// profile page routes
 	app.get('/myProfile', middleware.requirePblUser, routes.views.myProfile);
+	// project create, generate, updates and other routes
 	app.all('/project', middleware.requirePblUser, routes.views.project);
 	app.all('/project/:id', middleware.requirePblUser, routes.views.project);
 	app.get('/currentProject/:id', middleware.requirePblUser, routes.views.currentProject);
 	app.get('/projectList', middleware.requirePblUser, routes.views.projectList);
+	// task planning routes
 	app.all('/taskPlan', middleware.requirePblUser, routes.views.taskPlan);
 	app.all('/taskPlan/:id/detailTaskPlan', middleware.requirePblUser, routes.views.taskPlan.detailTaskPlan);
+	// collect resources routes
 	app.all('/collectResource', middleware.requirePblUser, routes.views.collectResource);
+	// learning agenda routes
 	app.all('/learningAgenda', middleware.requirePblUser, routes.views.learningAgenda);
 	app.all('/learningAgenda/:id/detailLearningAgenda', middleware.requirePblUser, routes.views.learningAgenda.detailLearningAgenda);
 	app.all('/learningAgenda/addLearningAgendaAnswer', middleware.requirePblUser, routes.views.learningAgenda.addLearningAgendaAnswer);
+	// documentation page routes
 	app.all('/documentation', middleware.requirePblUser, routes.views.documentation);
-	app.all('/documentation/:id/create', middleware.requirePblUser, routes.views.documentation.create);
+	app.all('/documentation/docDetail/:id', middleware.requirePblUser, routes.views.documentation.docDetail);
+	app.all('/documentation/docCreate', middleware.requirePblUser, routes.views.documentation.docCreate);
+	// presentation page routes
 	app.all('/presentation', middleware.requirePblUser, routes.views.presentation);
-	app.get('/showcase', middleware.requirePblUser, routes.views.showcase);
+	app.all('/presentation/addArtefact', middleware.requirePblUser, routes.views.presentation.addArtefact);
+	app.all('/presentation/addFeedback', middleware.requirePblUser, routes.views.presentation.addFeedback);
+	// showcase page routes
+	app.all('/showcase', middleware.requirePblUser, routes.views.showcase);
+	app.all('/showcase/detailShowcase/:id', middleware.requirePblUser, routes.views.showcase.detailShowcase);
 
-	// my api
+	// my api routes
 	app.get('/api/myData/list', keystone.middleware.api, routes.api.myData.list);
 	app.all('/api/myData/:id/participants', keystone.middleware.api, routes.api.myData.participants);
 	app.all('/api/myData/addProjectId', keystone.middleware.api, routes.api.myData.addProjectId);
 	app.all('/api/myData/:id/projectGenerateNotification', keystone.middleware.api, routes.api.myData.projectGenerateNotification);
 
-	// chat service
+	// chat service and notifications routes
 	app.all('/chat-notification', middleware.requirePblUser, routes.views.chatme);
 	app.all('/chatme', middleware.requirePblUser, routes.views.chatme);
 

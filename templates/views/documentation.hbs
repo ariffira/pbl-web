@@ -1,7 +1,7 @@
 <div class="form-group">
 	<div class="form-row">
 		<div class="col-md-12">
-			<a href="/documentation/create"class="btn btn-primary">
+			<a href="/documentation/docCreate"class="btn btn-primary">
 				<i class="fa fa-fw fa-book"></i> Create Documentation Page
 			</a>
 		</div>
@@ -41,10 +41,10 @@
 								{{_id}}
 							</td>
 							<td>
-								<a href="/documentation/{{_id}}/create" class="btn btn-primary">
+								<a href="/documentation/docDetail/{{_id}}" class="btn btn-primary">
 									Edit
 								</a>
-								<button type="button" class="btn btn-success">Detail</button>
+								<button type="button" class="btn btn-success" disabled>Delete</button>
 							</td>
 						</tr>
 					{{/each}}

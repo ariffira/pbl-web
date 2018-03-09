@@ -1,0 +1,32 @@
+<h5 style="text-align: center">
+	<i class="fa fa-fw fa-plus-square"></i>Add Project Outcome/Artefact video, picture, text, files:
+</h5>
+<hr>
+<form method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="add.presentationFile">
+	<div class="form-group row">
+		<label for="pblImage" class="col-sm-2 col-form-label">Upload Files (ppt,pdf,doc etc.):</label>
+		<div class="col-sm-8">
+			<input type="file" name="file_upload" id="file_upload">
+			<label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
+			<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+			<div id="new_path"></div>
+			<br>
+		</div>
+		<div class="col-sm-2">
+			<ul id="file_list">
+			</ul>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="resources_upload" class="col-md-12"><h6 style="text-align: center"> Add Artefacts (Image, Video, Outcome List)</h6></label>
+		<div class="col-sm-10">
+			<textarea name="resources_upload" class="form-control sir-trevor" id="file_upload"></textarea>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-sm-10">
+			<button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>Save All</button>
+		</div>
+	</div>
+</form>

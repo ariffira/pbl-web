@@ -1,6 +1,12 @@
 <form method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="idea.generate">
 	<div class="form-group row">
+		<label for="formTitle" class="col-sm-12 col-form-label">
+			<b><i class="fa fa-fw fa-lightbulb-o"></i>Idea Generation Form: Save your idea using this form</b>
+		</label>
+	</div>
+	<hr>
+	<div class="form-group row">
 		<label for="ideaTitle" class="col-md-2 col-form-label">Title of Your Idea:</label>
 		<div class="col-sm-10">
 			<input type="text" name="title" class="form-control" value="{{ data.idea.title }}" placeholder="Give a Title for your idea.....">
@@ -26,13 +32,29 @@
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-10">
-			{{#if data.idea}}
-				<a href="#"class="btn btn-primary form-control col-sm-5">Edit Idea</a>
-				<a href="#"class="btn btn-secondary form-control col-sm-5">Create Project</a>
-			{{else}}
-				<button type="submit" class="btn btn-primary">Idea Generate</button>
-			{{/if}}
+			<button type="submit" class="btn btn-primary">Generate Idea</button>
 		</div>
 	</div>
 </form>
-
+{{#if data.idea}}
+<hr>
+<div class="container">
+	<div class="row">
+		<label for="captionIdeaGeneration" class="col-sm-12 col-form-label">
+			<h5 style="text-align: center"><i class="fa fa-fw fa-lightbulb-o"></i>List of Ideas</h5>
+		</label>
+	</div>
+	{{#each data.idea}}
+		<div class="row">
+			<div class="col-sm-10">
+				<ul>
+					<li>
+						<a href="/idea/detailIdea/{{_id}}">Idea Title: {{title}}</a>, Added By: {{ createdBy.name.first }} {{ createdBy.name.last }}
+						{{#if projectId}} , <a href="/currentProject/{{projectId._id}}">Project Title: {{projectId.title}}</a>{{/if}}
+					</li>
+				</ul>
+			</div>
+		</div>
+	{{/each}}
+</div>
+{{/if}}

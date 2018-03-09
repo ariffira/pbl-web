@@ -28,6 +28,12 @@ module.exports = function () {
 		}
 	};
 
+	/**
+	 *  handlebar helper for increment of loop value
+	 */
+	_helpers.inc = function (value, options) {
+		return parseInt(value) + 1;
+	};
 
 	/**
 	 * Port of Ghost helpers to support cross-theming

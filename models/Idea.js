@@ -14,6 +14,7 @@ Idea.add({
 	createdBy: { type: Types.Relationship, ref: 'User' },
 	publishedAt: Date,
 	file_upload: { type: Types.Code, language: 'json' },
+	projectId: { type: Types.Relationship, ref: 'Project' },
 });
 
 /**

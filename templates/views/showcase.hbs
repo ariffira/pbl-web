@@ -1,8 +1,48 @@
+<!-- Add showcase button as Modal -->
+<!-- Button trigger modal -->
+<div class="form-group">
+	<div class="form-row">
+		<div class="col-md-6">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addShowcaseModal">
+				<i class="fa fa-newspaper-o"></i> Add new Showcase
+			</button>
+		</div>
+	</div>
+</div>
 <!-- Card Columns Example Social Feed-->
-<div class="mb-0 mt-4">
-	<i class="fa fa-newspaper-o"></i> Showcases</div>
-<hr class="mt-2">
 <div class="card-columns">
+	<!-- from DB -->
+	<div class="card mb-3">
+		{{#if data.showcase}}
+			{{#each data.showcase}}
+			<a href="#">
+				<img class="card-img-top img-fluid w-100" src="{{uploaded_file_path}}" alt="showcaseImage">
+			</a>
+			<div class="card-body">
+				<h6 class="card-title mb-1"><a href="#">{{createdBy.name.firstname}} {{createdBy.name.lastname}}</a></h6>
+				<p class="card-text small">{{title}}
+				</p>
+			</div>
+		    <hr class="my-0">
+			<div class="card-body py-2 small">
+				<a class="mr-3 d-inline-block" href="#">
+					<i class="fa fa-fw fa-thumbs-up"></i>Like
+				</a>
+				<a class="mr-3 d-inline-block" href="#">
+					<i class="fa fa-fw fa-comment"></i>Comment
+				</a>
+				<a class="d-inline-block" href="#">
+					<i class="fa fa-fw fa-share"></i>Share
+				</a>
+				<a class="d-inline-block" href="/showcase/detailShowcase/{{_id}}">
+					  <i class="fa fa-fw fa-arrow-down"></i>Details
+				</a>
+			</div>
+			<div class="card-footer small text-muted">Posted {{createdAt}} ago</div>
+			{{/each}}
+		{{/if}}
+	</div>
+	<!-- from DB -->
 	<!-- Example Social Card-->
 	<div class="card mb-3">
 		<a href="#">
@@ -143,3 +183,62 @@
 	</div>
 </div>
 <!-- /Card Columns-->
+
+
+<!-- Modal for add showcase -->
+<div class="modal fade" id="addShowcaseModal" tabindex="-1" role="dialog" aria-labelledby="addShowcaseModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addShowcaseModalLabel">Add New Showcase</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<!-- add showcase form start -->
+				<form method="post">
+					<input type="hidden" name="action" value="add.showcase">
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label for="showcaseTitle">Showcase Title:</label>
+								<input type="text" name="title" class="form-control" placeholder="Write down title of the showcase">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label for="showcaseContent">Showcase Details</label>
+								<textarea name="showcase_content" class="form-control" rows="3" placeholder="Write what is this showcase about..."></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-row">
+							<div class="col-md-12">
+								<label for="showcasePicture"><i class="fa fa-fw fa-image"></i></label>
+								<input type="file" name="file_upload" id="file_upload">
+								<label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
+								<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+								<div id="new_path"></div>
+							</div>
+							<div class="col-sm-2">
+								<ul id="file_list">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+					</div>
+				</form>
+				<!-- add showcase form end -->
+			</div>
+		</div>
+	</div>
+</div>

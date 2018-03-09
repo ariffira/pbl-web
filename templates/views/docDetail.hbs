@@ -1,0 +1,23 @@
+<form method="post" enctype="multipart/form-data">
+	<input type="hidden" name="action" value="update.doc">
+	<input type="hidden" name="id" value="{{document.0._id}}">
+	<div class="form-group row">
+		<label for="documentationTitle" class="col-sm-12 col-form-label">Create a Documentation Page:</label>
+		<div class="col-sm-12">
+			<input type="text" name="title" value="{{ document.0.title }}" class="form-control" placeholder="Give a title of the page...">
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-sm-12">
+			<textarea name="documentContent" class="form-control" id="documentContent" placeholder="Write documentation for your project...">
+				{{document.0.documentContent}}
+			</textarea>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-sm-10">
+			<button type="submit" class="btn btn-primary">Update Documentation Page</button>
+		</div>
+	</div>
+</form>
+
