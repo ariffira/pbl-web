@@ -19,17 +19,30 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="file_upload" class="col-md-12"><h5 style="text-align: center">Add Rich Contents(Image, Video, Tweet, List):</h5></label>
+		<label for="resources_upload" class="col-md-12"><h5 style="text-align: center">Add Rich Contents(Image, Video, Tweet, List):</h5></label>
 		<div class="col-sm-10">
-		<textarea name="file_upload" class="form-control sir-trevor" id="file_upload">{{ data.idea.file_upload }}</textarea>
+		<textarea name="resources_upload" class="form-control sir-trevor" id="resources_upload">{{ data.idea.resources_upload }}</textarea>
 		</div>
 	</div>
+	<div class="form-group row" id="UploadBox">
+		<label for="videoResource" class="col-md-2">Video Uploader:</label>
+		<div class="col-sm-10">
+			<input type="file" name="file_upload" id="file_upload">
+			<label for="file_name">File Name:<input type="text" name="file_name" id="file_name" /></label>
+			<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+			<div id="new_path"></div>
+			<br>
+		</div>
+		<div style="text-align:center" class="col-sm-12" id="video_file"></div>
+	</div>
+	<!--
 	<div class="form-group">
 		<label for="photoResource" class="col-md-12"><h5 style="text-align: center">Only Image:</h5></label>
 		<div class="col-sm-10">
 			<textarea name="photoResource" class="form-control sir-trevor-image-upload"></textarea>
 		</div>
 	</div>
+	-->
 	<div class="form-group row">
 		<div class="col-sm-10">
 			<button type="submit" class="btn btn-primary">Generate Idea</button>

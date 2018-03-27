@@ -56,7 +56,7 @@ exports = module.exports = function (req, res) {
 			title: locals.formData.title,
 			description: locals.formData.description,
 			createdBy: locals.user._id, // add user data
-			file_upload: locals.formData.file_upload,
+			resources_upload: locals.formData.resources_upload,
 		});
 		if (locals.user.projectId) {
 			newIdea.projectId = locals.user.projectId;
@@ -121,7 +121,7 @@ exports.detailIdea = function (req, res) {
 			result.set({
 				title: locals.formData.title,
 				description: locals.formData.description,
-				file_upload: locals.formData.file_upload,
+				resources_upload: locals.formData.resources_upload,
 			});
 			result.save(function (err, newResult) {
 				console.log('Idea updated...........');

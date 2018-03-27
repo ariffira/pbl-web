@@ -46,7 +46,7 @@ function uploadMyFile () {
 				$('#file_list').append('<li><a href="' + data.collection.url + '" download>' + data.collection.name + '</a></li>');
 				// sending back file new path input
 				$('#new_path').append('<input type="hidden" name="uploaded_file_path" value="' + data.collection.url + '">');
-
+				$('#video_file').append('<video width="800" height="600" align="center" controls><source src="' + data.collection.url + '" type="video/mp4"></video>');
 
 			})
 

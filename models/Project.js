@@ -23,6 +23,8 @@ Project.add({
 	// participants: { type: Types.Relationship, ref: 'MyStudent', many: true },
 	status: { type: Types.Select, options: 'Created, Running, Finished' },
 	notificationId: { type: Types.Relationship, ref: 'Notification' },
+	startDate: { type: Date },
+	endDate: { type: Date },
 });
 
 /**

@@ -13,7 +13,9 @@ Idea.add({
 	createdAt: { type: Date, default: Date.now },
 	createdBy: { type: Types.Relationship, ref: 'User' },
 	publishedAt: Date,
-	file_upload: { type: Types.Code, language: 'json' },
+	file_name: { type: String },
+	uploaded_file_path: { type: Types.Url },
+	resources_upload: { type: Types.Code, language: 'json' },
 	projectId: { type: Types.Relationship, ref: 'Project' },
 });
 

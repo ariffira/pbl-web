@@ -31,6 +31,7 @@ exports = module.exports = function (req, res) {
 			// console.log('successfully create new project...');
 			Project.model.findById(req.params.id).populate('createdBy').exec(function (err, result) {
 				locals.data.project = result;
+				console.log(result);
 				if (result.participants) {
 					var participants = JSON.parse(result.participants);
 					locals.data.participants = participants;
@@ -75,8 +76,9 @@ exports = module.exports = function (req, res) {
 			uploaded_file_path: locals.formData.uploaded_file_path,
 			resources_upload: locals.formData.resources_upload,
 			status: 'Created',
+			startDate: locals.formData.startDate,
+			endDate: locals.formData.endDate,
 		});
-		// console.log('Generating new PBL project.....');
 		var id = req.params.id;
 		// console.log(id);
 		if (id) {

@@ -70,6 +70,19 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		<label for="deadline" class="col-sm-2 col-form-label">Deadline:</label>
+		<div class="form-inline col-sm-5">
+			<label class="form-control">
+				Start-Date: <input class="form-control" type="date" name="startDate" value="{{ formatDate data.project.startDate}}">
+			</label>
+		</div>
+		<div class="form-inline col-sm-5">
+			<label class="form-control">
+				End-Date: <input class="form-control" type="date" name="endDate" value="{{ formatDate data.project.endDate}}">
+			</label>
+		</div>
+	</div>
+	<div class="form-group row">
 		<div class="col-sm-10">
 			{{#if data.project}}
 				<button type="submit" class="btn btn-primary form-control col-sm-5">Update Project Data</button>
@@ -120,8 +133,5 @@
 </div>
 {{/if}}
 <hr>
-<div class="form-group row">
-	<label for="deadline" class="col-sm-2 col-form-label">Deadline:</label>
-</div>
 <a href="/currentProject/{{data.project._id}}" id="projectGenerate" data-id="{{data.project._id}}" class="btn btn-success form-control col-sm-5">Generate Project</a>
 {{/if}}
