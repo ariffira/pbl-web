@@ -3,7 +3,7 @@ $(document).ready(function () {
 		var editor = new SirTrevor.Editor({
 			el: el,
 			defaultType: 'Text',
-			blockTypes: ['Text', 'Image', 'Video', 'List'],
+			blockTypes: ['Text', 'Image', 'Video', 'List', 'Quote', 'Heading'],
 		});
 		SirTrevor.setDefaults({
 			uploadUrl: '/api/fileupload/newImgFile',

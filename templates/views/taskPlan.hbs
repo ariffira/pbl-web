@@ -14,31 +14,17 @@
 			<div class="col-md-12">
 				<table class="table table-bordered">
 					<caption>List of Tasks</caption>
-					<thead>
-					<tr>
-						<th scope="col">index</th>
-						<th scope="col">Title</th>
-						<th scope="col">Content</th>
-						<th scope="col">Assigned To</th>
-						<th scope="col">Status</th>
-						<th scope="col">Options</th>
-					</tr>
-					</thead>
 					<tbody>
 					{{#each data.tasks}}
 						<tr>
-							<th scope="row">{{@index}}</th>
+							<th scope="row">Task no: {{inc @index}}</th>
 							<td>
-								<a href="/taskPlan/{{_id}}/detailTaskPlan">{{title}}</a>
-							</td>
-							<td>
-								{{description}}
-							</td>
-							<td>
-								{{assignTo}}
-							</td>
-							<td>
-								{{status}}
+								<a href="/taskPlan/{{_id}}/detailTaskPlan">Title: {{title}}</a><br>
+								Task Status: 
+								{{#ifeq status 'Todo'}}<span class="badge badge-primary">Todo</span>{{/ifeq}}
+								{{#ifeq status 'Doing'}}<span class="badge badge-success">Doing</span>{{/ifeq}}
+								{{#ifeq status 'Done'}}<span class="badge badge-default">Done</span>{{/ifeq}}
+								Assigned to: {{assignTo}}
 							</td>
 							<td>
 								<a href="/taskPlan/{{_id}}/detailTaskPlan"  class="btn btn-success">Detail/Edit</a>

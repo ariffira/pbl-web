@@ -97,8 +97,8 @@ exports = module.exports = function (req, res) {
 			newResource.webUrlResource = locals.formData.webUrlResource;
 		} else if (locals.formData.articleResource) {
 			newResource.articleResource = locals.formData.articleResource;
-		} else if (locals.formData.videoResource) {
-			newResource.videoResource = locals.formData.videoResource;
+		} else if (locals.formData.uploaded_file_path) {
+			newResource.uploaded_file_path = locals.formData.uploaded_file_path;
 		} else if (locals.formData.photoResource) {
 			newResource.photoResource = locals.formData.photoResource;
 		} else {

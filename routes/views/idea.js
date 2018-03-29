@@ -16,7 +16,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'Make New idea';
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
-
+	locals.ideaSubmitted = false;
 	locals.data = {
 		idea: [],
 	};
@@ -57,6 +57,7 @@ exports = module.exports = function (req, res) {
 			description: locals.formData.description,
 			createdBy: locals.user._id, // add user data
 			resources_upload: locals.formData.resources_upload,
+			uploaded_file_path: locals.formData.uploaded_file_path,
 		});
 		if (locals.user.projectId) {
 			newIdea.projectId = locals.user.projectId;
@@ -70,6 +71,8 @@ exports = module.exports = function (req, res) {
 				console.log(err);
 			} else {
 				// console.log(result);
+				locals.ideaSubmitted = true;
+				req.flash('success', { title: 'A new idea successfully generated.....' });
 				return res.redirect('/idea/' + result._id);
 			}
 			next();
@@ -118,10 +121,12 @@ exports.detailIdea = function (req, res) {
 		// console.log(ideaId);
 		Idea.model.findById(ideaId).exec(function (err, result) {
 			console.log(result);
+			var uploaded_file_path = result.uploaded_file_path;
 			result.set({
 				title: locals.formData.title,
 				description: locals.formData.description,
 				resources_upload: locals.formData.resources_upload,
+				uploaded_file_path: (uploaded_file_path) ? uploaded_file_path : locals.formData.uploaded_file_path,
 			});
 			result.save(function (err, newResult) {
 				console.log('Idea updated...........');
@@ -129,6 +134,8 @@ exports.detailIdea = function (req, res) {
 					console.log(err);
 				} else {
 					console.log(newResult);
+					locals.ideaSubmitted = true;
+					req.flash('success', { title: 'A new idea successfully Updated....' });
 					locals.data.tasks = newResult;
 					return res.redirect('/idea/detailIdea/' + ideaId);
 				}

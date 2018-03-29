@@ -1,3 +1,6 @@
+{{#if projectSubmitted}}
+	{{{flashMessages messages.success}}}
+{{else}}
 <form method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="pbl.create">
 	<div class="form-group row">
@@ -13,7 +16,7 @@
 	<div class="form-group row">
 		<label for="pblTitle" class="col-sm-2 col-form-label">Project Title:</label>
 		<div class="col-sm-10">
-			<input type="text" name="title" value="{{ data.project.title }}" class="form-control" id="inputTitle" placeholder="Give a title/question/problem/challenge for your project.....">
+			<input type="text" name="title" value="{{ data.project.title }}" class="form-control" id="inputTitle" placeholder="Give a title/question/problem/challenge for your project....." required>
 		</div>
 	</div>
 	<div class="form-group row">
@@ -66,8 +69,25 @@
 	<div class="form-group">
 		<label for="resources_upload" class="col-md-12"><h5 style="text-align: center">Add Rich Contents(Image, Video, Tweet, List):</h5></label>
 		<div class="col-sm-10">
-			<textarea name="resources_upload" class="form-control sir-trevor" id="file_upload">{{ data.project.resources_upload }}</textarea>
+			<textarea name="resources_upload" class="form-control sir-trevor">{{ data.project.resources_upload }}</textarea>
 		</div>
+	</div>
+	<div class="form-group row">
+		<label for="videoResource" class="col-md-2">Video Uploader:</label>
+		<div class="col-sm-10">
+			<input type="file" name="file_upload" id="file_upload">
+			<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+			<div id="new_path"></div>
+			<br>
+		</div>
+		<div style="text-align:center" class="col-sm-12" id="video_file"></div>
+		{{#if data.project.uploaded_file_path }}
+			<div style="text-align:center" class="col-sm-12">
+				<video width="800" height="600" align="center" controls>
+					<source src="{{ data.project.uploaded_file_path }}" >
+				</video>
+			</div>
+		{{/if}}
 	</div>
 	<div class="form-group row">
 		<label for="deadline" class="col-sm-2 col-form-label">Deadline:</label>
@@ -92,6 +112,7 @@
 		</div>
 	</div>
 </form>
+{{/if}}
 {{#if data.project}}
 <hr>
 <form method="post" enctype="multipart/form-data">
@@ -99,7 +120,7 @@
 	<div class="form-group row">
 		<label class="col-md-12"><h5 style="text-align: center">Participants</h5></label>
 		<div class="col-sm-12">
-			<input type="text" name="participants" class="form-control" id="participants" placeholder="Select students">
+			<input type="text" name="participants" class="form-control" id="participants" placeholder="Select students" required>
 		</div>
 		<div class="col-sm-12">
 			<button type="submit" class="btn btn-primary col-sm-2">Add participants</button>
@@ -131,7 +152,7 @@
 	</div>
 	<!-- added student list end -->
 </div>
-{{/if}}
 <hr>
 <a href="/currentProject/{{data.project._id}}" id="projectGenerate" data-id="{{data.project._id}}" class="btn btn-success form-control col-sm-5">Generate Project</a>
+{{/if}}
 {{/if}}

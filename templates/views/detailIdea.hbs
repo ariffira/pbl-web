@@ -26,6 +26,23 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		<label for="videoResource" class="col-md-2">Video Uploader:</label>
+		<div class="col-sm-10">
+			<input type="file" name="file_upload" id="file_upload">
+			<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">
+			<div id="new_path"></div>
+			<br>
+		</div>
+		<div style="text-align:center" class="col-sm-12" id="video_file"></div>
+		{{#if data.idea.uploaded_file_path }}
+			<div style="text-align:center" class="col-sm-12">
+				<video width="800" height="600" align="center" controls>
+					<source src="{{ data.idea.uploaded_file_path }}" >
+				</video>
+			</div>
+		{{/if}}
+	</div>
+	<div class="form-group row">
 		<div class="col-sm-10">
 			<button type="submit" class="btn btn-primary">Update Idea</button>
 		</div>

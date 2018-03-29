@@ -1,16 +1,16 @@
 <h5 style="text-align: center"><i class="fa fa-fw fa-question-circle"></i>LearningAgenda Details</h5>
 <div class="form-group row">
-	<label for="question" class="col-sm-2 col-form-label">Question:</label>
+	<label for="question" class="col-sm-2 col-form-label">Question:(Questioned by: {{data.learningAgenda.createdBy.name.first}} {{data.learningAgenda.createdBy.name.last}})</label>
 	<div class="col-sm-10">
-		<input class="form-control" name="question" type="text" value="{{ data.learningAgenda.question }}">
+		<input class="form-control" name="question" type="text" value="{{ data.learningAgenda.question }}" disabled>
 	</div>
 </div>
 {{#if data.learningAgendaAnswer}}
 	{{#each data.learningAgendaAnswer}}
 		<div class="form-group row">
-			<label for="answer" class="col-sm-2 col-form-label">Answer:</label>
+			<label for="answer" class="col-sm-2 col-form-label">Answer:(Answered by: {{ createdBy.name.first }} {{ createdBy.name.last }})</label>
 			<div class="col-sm-10">
-				<input class="form-control" name="answer" type="text" value="{{answer}}">
+				<p class="form-control">{{answer}}</p>
 			</div>
 		</div>
 	{{/each}}
@@ -32,7 +32,7 @@
 		</div>
 		<div class="form-actions col-sm-12">
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="reset" class="btn btn-secondary" >Clear</button>
 				<button type="submit" class="btn btn-primary">Answer</button>
 			</div>
 		</div>

@@ -21,7 +21,8 @@ User.add({
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	pblUser: { type: Boolean, label: 'Can access Dashboard', index: true },
 	projectId: { type: Types.Relationship, ref: 'Project' },
-	mute: { type: Types.Select, options: 'on, off' },
+	mute: { type: Types.Select, options: 'on, off', default: 'off' },
+	aboutMe: { type: Types.Textarea },
 });
 
 // Provide access to Keystone

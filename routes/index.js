@@ -67,7 +67,7 @@ exports = module.exports = function (app) {
 	// student management routes
 	app.all('/myStudent', middleware.requirePblUser, routes.views.myStudent);
 	// profile page routes
-	app.get('/myProfile', middleware.requirePblUser, routes.views.myProfile);
+	app.all('/myProfile', middleware.requirePblUser, routes.views.myProfile);
 	// project create, generate, updates and other routes
 	app.all('/project', middleware.requirePblUser, routes.views.project);
 	app.all('/project/:id', middleware.requirePblUser, routes.views.project);

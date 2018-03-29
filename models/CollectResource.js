@@ -15,7 +15,7 @@ CollectResource.add({
 	resource_type: { type: Types.Select, options: 'Website, Video, Image, Article' },
 	webUrlResource: { type: Types.Url },
 	articleResource: { type: Types.Url },
-	videoResource: { type: Types.Url },
+	uploaded_file_path: { type: Types.Url },
 	photoResource: { type: Types.Url },
 });
 

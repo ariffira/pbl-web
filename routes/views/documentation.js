@@ -29,6 +29,7 @@ exports = module.exports = function (req, res) {
 			var id = locals.user.projectId;
 			var query = Documentation.model.find();
 			query.where('projectId', id);
+			query.populate('createdBy');
 			query.exec(function (err, result) {
 				locals.data.documents = result;
 				// console.log(result);
@@ -106,6 +107,7 @@ exports.docDetail = function (req, res) {
 		var docId = req.params.id;
 		var query = Documentation.model.find();
 		query.where('_id', docId);
+		query.populate('createdBy');
 		query.exec(function (err, result) {
 			locals.document = result;
 			// console.log(locals.document);

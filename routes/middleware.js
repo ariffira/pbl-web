@@ -9,7 +9,6 @@
  */
 var _ = require('lodash');
 
-
 /**
 	Initialises the standard view locals
 
@@ -67,3 +66,4 @@ exports.requirePblUser = function (req, res, next) {
 		next();
 	}
 };
+

@@ -29,6 +29,7 @@ exports = module.exports = function (req, res) {
 			var id = locals.user.projectId;
 			var query = LearningAgenda.model.find();
 			query.where('projectId', id);
+			query.populate('createdBy');
 			query.exec(function (err, result) {
 				locals.data.learningAgenda = result;
 				next();
@@ -89,11 +90,13 @@ exports.detailLearningAgenda = function (req, res) {
 		var questionId = req.params.id;
 		// console.log(questionId);
 		var query = LearningAgenda.model.findById(questionId);
+		query.populate('createdBy');
 		query.exec(function (err, result) {
 			locals.data.learningAgenda = result;
 			next();
 		});
 		var queryForAnswers = LearningAgendaAnswer.model.find();
+		queryForAnswers.populate('createdBy');
 		queryForAnswers.where('questionId', questionId);
 		queryForAnswers.exec(function (err, result) {
 			locals.data.learningAgendaAnswer = result;

@@ -35,10 +35,14 @@ exports = module.exports = function (req, res) {
 				if (result.status === 'Running') {
 					console.log('Running already...');
 					locals.data.project = result;
-					var participants = JSON.parse(result.participants);
-					var allLearningGoals = JSON.parse(result.allLearningGoals);
-					locals.data.participants = participants;
-					locals.data.allLearningGoals = allLearningGoals;
+					if (result.allLearningGoals) {
+						var allLearningGoals = JSON.parse(result.allLearningGoals);
+						locals.data.allLearningGoals = allLearningGoals;
+					}
+					if (result.participants) {
+						var participants = JSON.parse(result.participants);
+						locals.data.participants = participants;
+					}
 				} else if (result.status === 'Created') {
 					result.set({ status: 'Running' });
 					result.save(function (err, newResult) {
@@ -48,10 +52,10 @@ exports = module.exports = function (req, res) {
 						} else {
 							console.log(newResult);
 							locals.data.project = newResult;
-							var participants = JSON.parse(newResult.participants);
 							var allLearningGoals = JSON.parse(newResult.allLearningGoals);
-							locals.data.participants = participants;
 							locals.data.allLearningGoals = allLearningGoals;
+							var participants = JSON.parse(newResult.participants);
+							locals.data.participants = participants;
 						}
 					});
 				} else if (result.status === 'Finished') {

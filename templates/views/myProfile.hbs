@@ -1,3 +1,6 @@
+{{#if profileSubmitted}}
+	{{{flashMessages messages.success}}}
+{{else}}
 <div class="card">
 	<h5 class="card-header">Name: {{user.name.first}} {{user.name.last}}</h5>
 	<div class="card-body">
@@ -12,18 +15,21 @@
 				</form>
 			</div>
 		</div><hr>
-		<div class="row">
-			<label for="aboutYou" class="col-md-2"><h5>About Yourself:</h5></label>
-			<div class="col-sm-10">
-				<textarea name="aboutYou" class="form-control" rows="2" placeholder="Write down something about you......."></textarea>
+		<form method="post" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="add.aboutMe">
+			<div class="form-group row">
+				<label for="aboutMe" class="col-md-2"><h5>About Me:</h5></label>
+				<div class="col-sm-10">
+					<textarea name="aboutMe" class="form-control" rows="2" placeholder="Write down something about you.......">{{user.aboutMe}}</textarea>
+				</div>
+				<div class="col-sm-12">
+					<button type="submit" class="btn btn-primary col-sm-2">Add/update</button>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-		<a href="#" class="btn btn-primary">Edit Profile</a>
-		</div>
+		</form>
 	</div>
 </div>
-
+{{/if}}
 
 <!--
 <h3>Name:  {{!--user.name.first}} {{user.name.last}}</h3>

@@ -46,7 +46,7 @@ function uploadMyFile () {
 				$('#file_list').append('<li><a href="' + data.collection.url + '" download>' + data.collection.name + '</a></li>');
 				// sending back file new path input
 				$('#new_path').append('<input type="hidden" name="uploaded_file_path" value="' + data.collection.url + '">');
-				$('#video_file').append('<video width="800" height="600" align="center" controls><source src="' + data.collection.url + '" type="video/mp4"></video>');
+				$('#video_file').append('<video width="800" height="600" align="center" controls><source src="' + data.collection.url + '" ></video>');
 
 			})
 
@@ -200,10 +200,14 @@ function myCollection() {
 				'\t\t</div>';
 			break;
 		case 'Video':
-			document.getElementById('selectionType').innerHTML = '\t\t<label for="videoResource" class="col-sm-2 col-form-label">Upload a Video:</label>\n' +
-				'\t\t<div class="col-sm-6">\n' +
-				'\t\t\t<input type="text" name="videoResource" class="form-control" placeholder="Give a name..">\n' +
-				'\t\t</div>';
+			document.getElementById('selectionType').innerHTML = '\t\t<label for="videoResource" class="col-md-2">Video Uploader:</label>\n' +
+				'\t\t<div class="col-sm-10">\n' +
+				'\t\t\t<input type="file" name="file_upload" id="file_upload">\n' +
+				'\t\t\t<input type="button" value="Upload" class="btn btn-primary" onclick="uploadMyFile()">\n' +
+				'\t\t\t<div id="new_path"></div>\n' +
+				'\t\t\t<br>\n' +
+				'\t\t</div>\n' +
+				'\t\t<div style="text-align:center" class="col-sm-12" id="video_file"></div>';
 			break;
 		case 'Image':
 			document.getElementById('selectionType').innerHTML = '\t\t<label for="photoResource" class="col-sm-2 col-form-label">Upload a Picture:</label>\n' +

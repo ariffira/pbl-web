@@ -12,27 +12,14 @@
 		<div class="form-row">
 			<div class="col-md-12">
 				<table class="table table-bordered">
-					<caption>List of questions</caption>
-					<thead>
-					<tr>
-						<th scope="col">index</th>
-						<th scope="col">Question</th>
-						<th scope="col">Created By</th>
-						<th scope="col">Created At</th>
-					</tr>
-					</thead>
+					<caption>List of Learning agendas</caption>
 					<tbody>
 					{{#each data.learningAgenda}}
 						<tr>
-							<th scope="row">{{@index}}</th>
+							<th scope="row">Learning agenda no: {{inc @index}}</th>
 							<td>
-								<a href="/learningAgenda/{{_id}}/detailLearningAgenda">{{question}}</a>
-							</td>
-							<td>
-								{{createdBy}}
-							</td>
-							<td>
-								{{createdAt}}
+								<a href="/learningAgenda/{{_id}}/detailLearningAgenda">Question:{{question}}</a>
+								, By: {{createdBy.name.first}} {{createdBy.name.last}}, Added: {{date createdAt}}
 							</td>
 						</tr>
 					{{/each}}

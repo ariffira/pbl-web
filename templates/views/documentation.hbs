@@ -13,33 +13,15 @@
 		<div class="form-row">
 			<div class="col-md-12">
 				<table class="table table-bordered">
-					<caption>List of document pages</caption>
-					<thead>
-					<tr>
-						<th scope="col">index</th>
-						<th scope="col">Title</th>
-						<th scope="col">Content of Document</th>
-						<th scope="col">Created By</th>
-						<th scope="col">DocumentID</th>
-						<th scope="col">Options</th>
-					</tr>
-					</thead>
+					<caption>List of documentation pages</caption>
 					<tbody>
 					{{#each data.documents}}
 						<tr>
-							<th scope="row">{{@index}}</th>
 							<td>
-								{{title}}
-							</td>
-							<td>
-								{{documentContent}}
-							</td>
-							<td>
-								{{createdBy}}
-							</td>
-							<td>
-								{{_id}}
-							</td>
+								<b><a href="/documentation/docDetail/{{_id}}">Documentation no: {{inc @index}} </a></b>
+								, <b>Topic:</b> {{title}}
+								, <small><b>Documented By: </b><a href="#">{{createdBy.name.first}} {{createdBy.name.last}}</a></small>
+								, <small><b>Created: </b>{{date createdAt}}</small>
 							<td>
 								<a href="/documentation/docDetail/{{_id}}" class="btn btn-primary">
 									Edit
