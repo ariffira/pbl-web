@@ -86,3 +86,52 @@ exports.projectGenerateNotification = function (req, res) {
 	});
 };
 
+/**
+ * Mute notifications for flow-experience
+ * user data mute is on
+ */
+exports.mute = function (req, res) {
+	var userId = req.user._id;
+	var data = req.body;
+	var urlPath = data.path;
+	// console.log(userId);
+	User.model.findById(userId).exec(function (err, result) {
+		result.set({
+			mute: 'on',
+		});
+		result.save(function (err, newResult) {
+			if (err) {
+				console.log(err);
+			} else {
+				req.flash('success', { success: 'Mute Notification service is activated' });
+				console.log(urlPath);
+				res.redirect(urlPath);
+			}
+		});
+	});
+};
+
+/**
+ * Unmute notifications for flow-experience
+ * user data mute is off
+ */
+exports.unmute = function (req, res) {
+	var userId = req.user._id;
+	var data = req.body;
+	var urlPath = data.path;
+	// console.log(userId);
+	User.model.findById(userId).exec(function (err, result) {
+		result.set({
+			mute: 'off',
+		});
+		result.save(function (err, newResult) {
+			if (err) {
+				console.log(err);
+			} else {
+				req.flash('success', { success: 'Notification service is activated' });
+				console.log(urlPath);
+				res.redirect(urlPath);
+			}
+		});
+	});
+};

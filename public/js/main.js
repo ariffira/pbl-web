@@ -222,12 +222,47 @@ function myCollection() {
 }
 
 // onclick show answer input section
-$('#hideLink').click(function(){
+$('#hideLink').click(function () {
 	$('#answerLink').hide();
 	$('#answerInput').show();
 });
 // onclick show/hide toggle add presentation form
-$('#toggleLink').click(function(){
+$('#toggleLink').click(function () {
 	$('#addFileForm').toggle();
 });
 
+// mute notifications
+function muteMe() {
+	$('#muteLink').hide();
+	$('#unmuteLink').show();
+	var urlData = {
+		path: window.location.pathname,
+	};
+	$.ajax({
+		url: '/api/myData/mute',
+		data: urlData,
+		type: 'POST',
+		success: function () {
+			console.log('mute notification active now');
+			window.location.reload(true);
+		},
+	});
+}
+
+// unmute notifications
+function unmuteMe() {
+	$('#unmuteLink').hide();
+	$('#muteLink').show();
+	var urlData = {
+		path: window.location.pathname,
+	};
+	$.ajax({
+		url: '/api/myData/unmute',
+		data: urlData,
+		type: 'POST',
+		success: function () {
+			console.log('notification active now');
+			window.location.reload(true);
+		},
+	});
+}
