@@ -76,9 +76,11 @@ keystone.start(
 			io.on('connection', function (socket) {
 				// console.log('Socket message: A user connected.......');
 				// when a new project is generated
-				socket.on('project generated', function (data) {
-					console.log('data: ' + data.content);
-					io.emit('project generated', data);
+				socket.on('alert notifications', function (data) {
+					// var arr = [data];
+					var newData = JSON.stringify(data);
+					console.log('data: ' + newData);
+					io.emit('alert notifications', newData);
 				});
 
 				// socket for chat messages
@@ -93,15 +95,4 @@ keystone.start(
 				});
 			});
 		},
-		/*
-		onStart: function () {
-			var io = keystone.get('io');
-			io.on('connect', function (socket) {
-				console.log('connected............');
-				socket.on('disconnect', function () {
-					console.log('disconnected........');
-				});
-			});
-		}
-		*/
 	});

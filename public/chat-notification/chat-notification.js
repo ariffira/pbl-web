@@ -15,13 +15,29 @@ socket.on('chat message', function (msg) {
 * on log in user will see notifications
 * 1. first: save every changes, updates, messages in Notification collection in database with project ID
 * 2. after login a query will search for all notifications where project id match and show this notifications by socket emit/on
-* 3. if user flow-experience is on step 2 will not happen, no notifications
+* 3. if user mute is on then step 2 will not happen, no notifications
  */
-socket.emit('project generated', { content: 'A new Project has been generated' });
-socket.on('project generated', function (data)
-{
-	// alert(data.content);
-	document.getElementById('onProjectGenerate').innerHTML = data.content;
+// onload search for notifications and emit msg and alerts
+$(function () {
+	$.ajax({
+		url: '/api/myData/getNotificationData',
+		type: 'GET',
+		success: function (result) {
+			socket.emit('alert notifications', result);
+			socket.on('alert notifications', function (newData)
+			{
+				// var newData = JSON.parse(newData);
+				// var newData = JSON.stringify(newData);
+				for (var i = 0; i < newData.length; i++) {
+					document.getElementById('onProjectGenerate').innerHTML = '' + newData + '<a class="dropdown-item" href="#">\n' +
+						'<span class="text-success">\n' + newData.content + '</span>\n' +
+						'<span class="small float-right text-muted">' + newData[0].createdAt + '</span>\n' +
+						'<div class="dropdown-message small">extra data here</div>\n' +
+						'</a>';
+				}
+			});
+		},
+	});
 });
 // push notification to project ends testing
 

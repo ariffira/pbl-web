@@ -101,6 +101,7 @@ exports = module.exports = function (app) {
 	app.all('/api/myData/:id/projectGenerateNotification', keystone.middleware.api, routes.api.myData.projectGenerateNotification);
 	app.all('/api/myData/mute', keystone.middleware.api, routes.api.myData.mute);
 	app.all('/api/myData/unmute', keystone.middleware.api, routes.api.myData.unmute);
+	app.all('/api/myData/getNotificationData', keystone.middleware.api, routes.api.myData.getNotificationData);
 
 	// chat service and notifications routes
 	app.all('/chat-notification', middleware.requirePblUser, routes.views.chatme);

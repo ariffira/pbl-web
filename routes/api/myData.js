@@ -65,14 +65,26 @@ exports.addProjectId = function (req, res) {
 	});
 };
 
+/**
+ * Get all alert Notifications
+ * todo: sort by createdAt date
+ */
+exports.getNotificationData = function (req, res) {
+	var projectId = req.user.projectId;
+	// get all notifications related to this projectId
+	var query = Notification.model.find();
+	query.where('projectId', projectId);
+	query.exec(function (err, result) {
+		console.log(result);
+		res.send(result);
+	});
+};
 
 /**
  * insert notification for each project generate
  */
 exports.projectGenerateNotification = function (req, res) {
 	var projectId = req.params.id;
-	// console.log('notification get project id test');
-	// console.log(projectId);
 	/* save project id and notification msg to Notification model,
 	 * later when user will log in and find notification for this projectId
 	 */
