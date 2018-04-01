@@ -212,13 +212,22 @@ function myCollection() {
 		case 'Image':
 			document.getElementById('selectionType').innerHTML = '\t\t<label for="photoResource" class="col-sm-2 col-form-label">Upload a Picture:</label>\n' +
 				'\t\t<div class="col-sm-10">\n' +
-				'\t\t\t<textarea name="photoResource" class="form-control sir-trevor-image-upload"></textarea>\n' +
+				'\t\t\t<textarea name="photoResource" class="form-control sir-trevor-image-file"></textarea>\n' +
 				'\t\t</div>';
 			break;
 		default:
 			document.getElementById('selectionType').innerHTML = '<p>Please select A Type</p>';
 	}
-
+	// only image upload for this page
+	var imageEditor = new SirTrevor.Editor({
+		el: document.querySelector('.sir-trevor-image-file'),
+		defaultType: 'Image',
+		blockTypes: ['Image'],
+	});
+	SirTrevor.setDefaults({
+		uploadUrl: '/api/fileupload/newImgFile',
+		iconUrl: '/sir-trevor-0.6.6/sir-trevor-icons.svg',
+	});
 }
 
 // onclick show answer input section
