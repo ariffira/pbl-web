@@ -70,6 +70,7 @@ exports.addProjectId = function (req, res) {
  * todo: sort by createdAt date
  */
 exports.getNotificationData = function (req, res) {
+	var locals = res.locals;
 	var projectId = req.user.projectId;
 	// get all notifications related to this projectId
 	var query = Notification.model.find();
@@ -77,6 +78,7 @@ exports.getNotificationData = function (req, res) {
 	query.populate('projectId');
 	query.exec(function (err, result) {
 		console.log(result);
+		locals.notification = result;
 		res.send(result);
 	});
 };

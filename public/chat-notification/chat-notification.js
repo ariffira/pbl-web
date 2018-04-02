@@ -30,8 +30,8 @@ $(function () {
 				for (var i = 0; i < newDataObj.length; i++) {
 					document.getElementById('onProjectGenerate').innerHTML = '<a class="dropdown-item" href="#">\n' +
 						'<span class="text-success">\n' + newDataObj[i].content + '</span>\n' +
-						'<span class="small float-right text-muted">' + newDataObj[i].createdAt + '</span>\n' +
 						'<div class="dropdown-message small">'+ newDataObj[i].projectId.title + '</div>\n' +
+						'<span class="small float-right text-muted">' + newDataObj[i].createdAt + '</span>\n' +
 						'</a>';
 				}
 			});
