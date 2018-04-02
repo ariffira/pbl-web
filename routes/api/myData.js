@@ -74,6 +74,7 @@ exports.getNotificationData = function (req, res) {
 	// get all notifications related to this projectId
 	var query = Notification.model.find();
 	query.where('projectId', projectId);
+	query.populate('projectId');
 	query.exec(function (err, result) {
 		console.log(result);
 		res.send(result);

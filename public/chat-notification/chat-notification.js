@@ -26,13 +26,12 @@ $(function () {
 			socket.emit('alert notifications', result);
 			socket.on('alert notifications', function (newData)
 			{
-				// var newData = JSON.parse(newData);
-				// var newData = JSON.stringify(newData);
-				for (var i = 0; i < newData.length; i++) {
-					document.getElementById('onProjectGenerate').innerHTML = '' + newData + '<a class="dropdown-item" href="#">\n' +
-						'<span class="text-success">\n' + newData.content + '</span>\n' +
-						'<span class="small float-right text-muted">' + newData[0].createdAt + '</span>\n' +
-						'<div class="dropdown-message small">extra data here</div>\n' +
+				var newDataObj = JSON.parse(newData);
+				for (var i = 0; i < newDataObj.length; i++) {
+					document.getElementById('onProjectGenerate').innerHTML = '<a class="dropdown-item" href="#">\n' +
+						'<span class="text-success">\n' + newDataObj[i].content + '</span>\n' +
+						'<span class="small float-right text-muted">' + newDataObj[i].createdAt + '</span>\n' +
+						'<div class="dropdown-message small">'+ newDataObj[i].projectId.title + '</div>\n' +
 						'</a>';
 				}
 			});
