@@ -110,7 +110,7 @@ exports.detailTaskPlan = function (req, res) {
 				title: locals.formData.title,
 				description: locals.formData.description,
 				assignTo: locals.formData.assignTo,
-				// status: locals.formData.status,
+				status: locals.formData.status,
 			});
 			result.save(function (err, newResult) {
 				console.log('Task plan updated...........');

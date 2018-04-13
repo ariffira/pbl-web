@@ -102,6 +102,14 @@ exports = module.exports = function (app) {
 	app.all('/api/myData/mute', keystone.middleware.api, routes.api.myData.mute);
 	app.all('/api/myData/unmute', keystone.middleware.api, routes.api.myData.unmute);
 	app.all('/api/myData/getNotificationData', keystone.middleware.api, routes.api.myData.getNotificationData);
+	app.all('/api/myData/tasksTotal', keystone.middleware.api, routes.api.myData.tasksTotal);
+	app.all('/api/myData/tasksTodo', keystone.middleware.api, routes.api.myData.tasksTodo);
+	app.all('/api/myData/tasksDoing', keystone.middleware.api, routes.api.myData.tasksDoing);
+	app.all('/api/myData/tasksDone', keystone.middleware.api, routes.api.myData.tasksDone);
+	app.all('/api/myData/collectionTotal', keystone.middleware.api, routes.api.myData.collectionTotal);
+	app.all('/api/myData/learningAgendaTotal', keystone.middleware.api, routes.api.myData.learningAgendaTotal);
+	app.all('/api/myData/documentationTotal', keystone.middleware.api, routes.api.myData.documentationTotal);
+	app.all('/api/myData/ideaTotal', keystone.middleware.api, routes.api.myData.ideaTotal);
 
 	// chat service and notifications routes
 	app.all('/chat-notification', middleware.requirePblUser, routes.views.chatme);

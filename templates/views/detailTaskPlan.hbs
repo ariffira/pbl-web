@@ -16,8 +16,24 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		<label for="taskStatus" class="col-sm-2 col-form-label">Status:</label>
+		<div class="col-sm-2">
+			{{#ifeq data.tasks.status 'Todo'}}<span class="badge badge-primary form-control">Todo</span>{{/ifeq}}
+			{{#ifeq data.tasks.status 'Doing'}}<span class="badge badge-success form-control">Doing</span>{{/ifeq}}
+			{{#ifeq data.tasks.status 'Done'}}<span class="badge badge-danger form-control">Done</span>{{/ifeq}}
+		</div>
+		<div class="col-sm-8">
+			<select type="status" name="status" class="form-control">
+				<option value="{{data.tasks.status}}">Change Status</option>
+				<option value="Todo">Todo</option>
+				<option value="Doing">Doing</option>
+				<option value="Done">Done</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group row">
 		<label for="assignTo" class="col-sm-2 col-form-label">Assigned To:</label>
-		<div class="col-sm-10">
+		<div class="col-sm-6">
 			<select type="assignTo" name="assignTo" class="form-control" id="select-assign-to" data-id="{{user.projectId}}">
 				<option value="{{data.tasks.assignTo}}">{{data.tasks.assignTo}}</option>
 			</select>

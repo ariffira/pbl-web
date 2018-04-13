@@ -30,7 +30,7 @@ Project.add({
 /**
  * Relationships
  */
-Project.relationship({ ref: 'User', path: 'users', refPath: 'projectId' });
+-Project.relationship({ ref: 'User', path: 'users', refPath: 'projectId' });
 Project.relationship({ ref: 'TaskPlan', path: 'taskplans', refPath: 'projectId' });
 
 /**
