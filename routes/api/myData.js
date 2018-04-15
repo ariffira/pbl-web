@@ -167,7 +167,7 @@ exports.tasksTotal = function (req, res) {
 	{ $match: { projectId: projectid } }, { $group: { _id: null, numberOfTotalTask: { $sum: 1 } } },
 	]);
 	countTotalTask.exec(function (err, result) {
-		if (result[0].numberOfTotalTask) {
+		if (result[0]) {
 			console.log('Number of Total tasks:' + result[0].numberOfTotalTask);
 			res.send(result);
 		}
@@ -187,7 +187,7 @@ exports.tasksTodo = function (req, res) {
 		{ $match: { projectId: projectid, status: 'Todo' } }, { $group: { _id: null, numberOfTodo: { $sum: 1 } } },
 	]);
 	countTodo.exec(function (err, result) {
-		if (result[0].numberOfTodo) {
+		if (result[0]) {
 			console.log('Number of Todo:' + result[0].numberOfTodo);
 			res.send(result);
 		}
@@ -207,7 +207,7 @@ exports.tasksDoing = function (req, res) {
 		{ $match: { projectId: projectid, status: 'Doing' } }, { $group: { _id: null, numberOfDoing: { $sum: 1 } } },
 	]);
 	countDoing.exec(function (err, result) {
-		if (result[0].numberOfDoing) {
+		if (result[0]) {
 			console.log('Number of Doing:' + result[0].numberOfDoing);
 			res.send(result);
 		}
@@ -227,7 +227,7 @@ exports.tasksDone = function (req, res) {
 		{ $match: { projectId: projectid, status: 'Done' } }, { $group: { _id: null, numberOfDone: { $sum: 1 } } },
 	]);
 	countDone.exec(function (err, result) {
-		if (result[0].numberOfDone) {
+		if (result[0]) {
 			console.log('Number of Done:' + result[0].numberOfDone);
 			res.send(result);
 		}
@@ -248,7 +248,7 @@ exports.collectionTotal = function (req, res) {
 		{ $match: { projectId: projectid } }, { $group: { _id: null, numberOfTotalCollection: { $sum: 1 } } },
 	]);
 	countTotalCollection.exec(function (err, result) {
-		if (result[0].numberOfTotalCollection) {
+		if (result[0]) {
 			console.log('Number of Total Resource collections:' + result[0].numberOfTotalCollection);
 			res.send(result);
 		}
@@ -269,7 +269,7 @@ exports.learningAgendaTotal = function (req, res) {
 		{ $match: { projectId: projectid } }, { $group: { _id: null, numberOfTotalLearningAgenda: { $sum: 1 } } },
 	]);
 	countTotalLA.exec(function (err, result) {
-		if (result) {
+		if (result[0]) {
 			console.log('Number of Total LA:' + result[0].numberOfTotalLearningAgenda);
 			res.send(result);
 		}
@@ -290,7 +290,7 @@ exports.documentationTotal = function (req, res) {
 		{ $match: { projectId: projectid } }, { $group: { _id: null, numberOfTotalDocumentation: { $sum: 1 } } },
 	]);
 	countTotalDocs.exec(function (err, result) {
-		if (!result == null) {
+		if (result[0]) {
 			console.log('Number of Total Docs:' + result[0].numberOfTotalDocumentation);
 			res.send(result);
 		}
@@ -311,7 +311,7 @@ exports.ideaTotal = function (req, res) {
 		{ $match: { projectId: projectid } }, { $group: { _id: null, numberOfTotalIdea: { $sum: 1 } } },
 	]);
 	countTotalIdea.exec(function (err, result) {
-		if (result[0].numberOfTotalIdea) {
+		if (result[0]) {
 			console.log('Number of Total ideas:' + result[0].numberOfTotalIdea);
 			res.send(result);
 		}

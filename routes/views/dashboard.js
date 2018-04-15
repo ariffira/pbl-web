@@ -36,51 +36,8 @@ exports = module.exports = function (req, res) {
 	 *  timeline view of all project updates, charts update data etc
 	 *  1. search tasks, ideas, collect-resources, learning agendas etc by createdAt and short them by time from today to DSC
 	 *  limit 7 days
-	 *  2. for charts find tasks status and count them send dataset
 	 */
 	view.on('init', function (next) {
-		// chart data queries start
-		/**
-		var projectid = locals.user.projectId;
-		// count number of tasks to-do, done, doing for charts
-		// to-do numbers
-		var countTodo = TaskPlan.model.aggregate([
-			{ $match: { projectId: projectid, status: 'Todo' } }, { $group: { _id: null, numberOfTodo: { $sum: 1 } } },
-		]);
-		countTodo.exec(function (err, result) {
-			if (result[0].numberOfTodo) {
-				console.log('Number of Todo:' + result[0].numberOfTodo);
-			}
-			else {
-				console.log('0');
-			}
-		});
-		// doing numbers
-		var countDoing = TaskPlan.model.aggregate([
-			{ $match: { projectId: projectid, status: 'Doing' } }, { $group: { _id: null, numberOfDoing: { $sum: 1 } } },
-		]);
-		countDoing.exec(function (err, result) {
-			if (result[0].numberOfDoing) {
-				console.log('Number of Doing:' + result[0].numberOfDoing);
-			}
-			else {
-				console.log('0');
-			}
-		});
-		// Done numbers
-		var countDone = TaskPlan.model.aggregate([
-			{ $match: { projectId: projectid, status: 'Done' } }, { $group: { _id: null, numberOfDone: { $sum: 1 } } },
-		]);
-		countDone.exec(function (err, result) {
-			if (result[0].numberOfDone) {
-				console.log('Number of Done:' + result[0].numberOfDone);
-			}
-			else {
-				console.log('0');
-			}
-		});
-		*/
-		// chart data queries ends
 		if (locals.user.projectId) {
 			var id = locals.user.projectId;
 			// tasks data search
@@ -131,10 +88,10 @@ exports = module.exports = function (req, res) {
 				// console.log(result);
 			});
 			// showcases search
-			var queryForshowcase = Showcase.model.find();
-			queryForshowcase.where('projectId', id);
-			queryForshowcase.sort('-createdAt').limit(7);
-			queryForshowcase.exec(function (err, result) {
+			var queryForShowcase = Showcase.model.find();
+			queryForShowcase.where('projectId', id);
+			queryForShowcase.sort('-createdAt').limit(7);
+			queryForShowcase.exec(function (err, result) {
 				locals.data.showcases = result;
 				// console.log(result);
 			});

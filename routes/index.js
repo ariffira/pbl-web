@@ -68,6 +68,7 @@ exports = module.exports = function (app) {
 	app.all('/myStudent', middleware.requirePblUser, routes.views.myStudent);
 	// profile page routes
 	app.all('/myProfile', middleware.requirePblUser, routes.views.myProfile);
+	app.all('/myProfile/addFiles', middleware.requirePblUser, routes.views.myProfile.addFiles);
 	// project create, generate, updates and other routes
 	app.all('/project', middleware.requirePblUser, routes.views.project);
 	app.all('/project/:id', middleware.requirePblUser, routes.views.project);

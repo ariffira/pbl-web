@@ -52,41 +52,38 @@ $(document).ready(function () {
 	// pie chart start
 	$.get('/api/myData/tasksTotal', function (result) {
 		totalTask = result[0].numberOfTotalTask;
-		$.get('/api/myData/tasksTotal', function (result) {
-			totalTask = result[0].numberOfTotalTask;
-			$.get('/api/myData/collectionTotal', function (result) {
-				totalCollection = result[0].numberOfTotalCollection;
-				$.get('/api/myData/learningAgendaTotal', function (result) {
-					totalLearningAgenda = result[0].numberOfTotalLearningAgenda;
-					$.get('/api/myData/documentationTotal', function (result) {
-						totalDocumentation = result[0].numberOfTotalDocumentation;
+		$.get('/api/myData/collectionTotal', function (result) {
+			totalCollection = result[0].numberOfTotalCollection;
+			$.get('/api/myData/learningAgendaTotal', function (result) {
+				totalLearningAgenda = result[0].numberOfTotalLearningAgenda;
+				$.get('/api/myData/documentationTotal', function (result) {
+					totalDocumentation = result[0].numberOfTotalDocumentation;
+				});
+				$.get('/api/myData/ideaTotal', function (result) {
+					totalIdea = result[0].numberOfTotalIdea;
+					totalAll = totalTask + totalCollection + totalLearningAgenda + totalDocumentation + totalIdea;
+					Chart.scaleService.updateScaleDefaults('linear', {
+						ticks: {
+							min: 0,
+							max: totalAll,
+						},
 					});
-					$.get('/api/myData/ideaTotal', function (result) {
-						totalIdea = result[0].numberOfTotalIdea;
-						totalAll = totalTask + totalCollection + totalLearningAgenda + totalDocumentation + totalIdea;
-						Chart.scaleService.updateScaleDefaults('linear', {
-							ticks: {
-								min: 0,
-								max: totalAll,
+					var pieChart = new Chart(document.getElementById('myPieChart'), {
+						type: 'pie',
+						data: {
+							labels: ['Tasks', 'Collected Resources', 'Learning Agendas', 'Documentations', 'Ideas'],
+							datasets: [{
+								label: 'numbers',
+								backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
+								data: [totalTask, totalCollection, totalLearningAgenda, totalDocumentation, totalIdea],
+							}],
+						},
+						options: {
+							title: {
+								display: true,
+								text: 'Project activities in number',
 							},
-						});
-						var pieChart = new Chart(document.getElementById('myPieChart'), {
-							type: 'pie',
-							data: {
-								labels: ['Tasks', 'Collected Resources', 'Learning Agendas', 'Documentations', 'Ideas'],
-								datasets: [{
-									label: 'numbers',
-									backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
-									data: [totalTask, totalCollection, totalLearningAgenda, totalDocumentation, totalIdea],
-								}],
-							},
-							options: {
-								title: {
-									display: true,
-									text: 'Project activities in number',
-								},
-							},
-						});
+						},
 					});
 				});
 			});

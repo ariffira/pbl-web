@@ -2,7 +2,12 @@
 	{{{flashMessages messages.success}}}
 {{else}}
 <div class="card">
-	<h5 class="card-header">Name: {{user.name.first}} {{user.name.last}}</h5>
+	<h5 class="card-header" style="text-align: center">
+		Name: {{user.name.first}} {{user.name.last}}<br/>
+		Email: {{user.email}}<br/>
+		My role: {{user.role}}<br/>
+		Institution: {{user.institution}}
+	</h5>
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-3">
@@ -30,6 +35,69 @@
 	</div>
 </div>
 {{/if}}
+<!--  current project data -->
+<h5 style="text-align: left"><i class="fa fa-fw fa-clipboard"></i>My ongoing project</h5>
+<div class="form-group row">
+	<label for="projecTitle" class="col-sm-2 col-form-label">Project Title: </label>
+	<div class="col-sm-10">
+		<input class="form-control" type="text" value="{{ data.project.title }}">
+	</div>
+</div>
+<div class="form-group row">
+	<label for="ideaDescription" class="col-sm-2 col-form-label">Description:</label>
+	<div class="col-sm-10">
+		<p class="form-control-static">{{ data.project.description }}</p>
+	</div>
+</div>
+<div class="form-group row">
+	<label for="learningGoals" class="col-sm-2 col-form-label">Learning Goals:</label>
+	<div class="col-sm-10">
+		<ul>
+			{{#if data.allLearningGoals}}
+				{{#each data.allLearningGoals}}
+					<li>{{goal}}</li>
+				{{/each}}
+			{{/if}}
+		</ul>
+	</div>
+</div>
+<div class="form-group row">
+	<label for="ideaStatus" class="col-sm-2 col-form-label">Status of the Project:</label>
+	<div class="col-sm-10">
+		<p class="form-control-static">
+			{{#ifeq data.project.status 'Running' }}
+				<b>{{ data.project.status }}(This project is generated already)</b>
+			{{/ifeq}}
+			{{#ifeq data.project.status 'Created' }}
+				<b>{{ data.project.status }}(This project is created, but not generated)</b>
+			{{/ifeq}}
+			{{#ifeq data.project.status 'Finished' }}
+				<b>{{ data.project.status }}(This project is Finished and no current project here)</b>
+			{{/ifeq}}
+		</p>
+	</div>
+</div>
+<div class="form-group row">
+	<label for="deadline" class="col-sm-2 col-form-label">Deadline:</label>
+	<div class="form-inline col-sm-5">
+		<label class="form-control">
+			<b>Start-Date:</b> {{data.project.startDate}}
+		</label>
+	</div>
+	<div class="form-inline col-sm-5">
+		<label class="form-control">
+			<b>End-Date:</b> {{data.project.endDate}}
+		</label>
+	</div>
+</div>
+<hr>
+<div class="form-group row">
+	<div class="col-sm-5">
+		<a href="#" class="btn btn-success"><i class="fa fa-fw fa-file-pdf-o"></i>Export as Pdf</a>
+		<a href="#" class="btn btn-primary"><i class="fa fa-fw fa-plus-square"></i>Add Files</a>
+	</div>
+</div>
+
 
 <!--
 <h3>Name:  {{!--user.name.first}} {{user.name.last}}</h3>
