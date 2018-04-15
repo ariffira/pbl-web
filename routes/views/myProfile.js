@@ -1,6 +1,7 @@
 var keystone = require('keystone');
 var User = keystone.list('User');
 var Project = keystone.list('Project');
+var MyProfile = keystone.list('MyProfile');
 
 exports = module.exports = function (req, res) {
 
@@ -23,6 +24,16 @@ exports = module.exports = function (req, res) {
 	// initial view of the profile
 	view.on('init', function (next) {
 		// add ePortfolio data
+		/**
+		 * search in MyProfile collection for this users data
+		 */
+		var userId = locals.user._id;
+		var queryForProfileData = MyProfile.model.find();
+		queryForProfileData.where('createdBy', userId);
+		queryForProfileData.exec(function (err, result) {
+			locals.data.myProfile = result;
+			next();
+		});
 		var projectId = locals.user.projectId;
 		if (projectId) {
 			Project.model.findById(projectId).exec(function (err, result) {
@@ -90,35 +101,34 @@ exports = module.exports = function (req, res) {
 /**
  * Add ePortfolio files
  */
-exports.addFiles = function (req, res) {
+exports.addProfile = function (req, res) {
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
 
 	// locals.section is used to set the currently selected
-	locals.section = 'Add Files';
+	locals.section = 'Add MyProfile Files';
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
 
 	/**
-	 *  Add files 
+	 *  Add profile files
 	 */
 	view.on('post', { action: 'add.profileFile' }, function (next) {
-		// creating a new object for presentation data
+		// creating a new object for myProfile data
 		var newFile = new MyProfile.model({
 			file_name: locals.formData.file_name,
 			uploaded_file_path: locals.formData.uploaded_file_path,
 			resources_upload: locals.formData.resources_upload,
 			createdBy: locals.user._id, // add user data
-			userId: locals.user._id,
 		});
 		console.log(newFile);
-		// saving artefact data  in database
+		// saving profile data  in database
 		newFile.save(function (err, result) {
 			if (err) {
 				locals.data.validationErrors = err.errors;
 				console.log(err);
 			} else {
-				// console.log(result);
+				console.log(result);
 				return res.redirect('/myProfile');
 			}
 			next();
