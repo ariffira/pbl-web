@@ -28,7 +28,7 @@ $(function () {
 			{
 				var newDataObj = JSON.parse(newData);
 				for (var i = 0; i < newDataObj.length; i++) {
-					document.getElementById('onProjectGenerate').innerHTML = '<a class="dropdown-item" href="#">\n' +
+					document.getElementById('onProjectGenerate').innerHTML = '<a class="dropdown-item" href="/currentProject/' + newDataObj[i].projectId._id + '">\n' +
 						'<span class="text-success">\n' + newDataObj[i].content + '</span>\n' +
 						'<div class="dropdown-message small">'+ newDataObj[i].projectId.title + '</div>\n' +
 						'<span class="small float-right text-muted">' + newDataObj[i].createdAt + '</span>\n' +

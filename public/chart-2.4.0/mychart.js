@@ -10,40 +10,38 @@ $(document).ready(function () {
 	var doneTask;
 	var totalAll;
 	// bar chart data start
-	$.get('/api/myData/tasksTotal', function (result) {
-		totalTask = result[0].numberOfTotalTask;
-		Chart.scaleService.updateScaleDefaults('linear', {
-			ticks: {
-				min: 0,
-				max: totalTask,
-			},
-		});
-		var ctx = document.getElementById('myBarChart').getContext('2d');
-		$.get('/api/myData/tasksTodo', function (result) {
-			toDoTask = result[0].numberOfTodo;
-			$.get('/api/myData/tasksDoing', function (result) {
-				doingTask = result[0].numberOfDoing;
-				$.get('/api/myData/tasksDone', function (result) {
-					doneTask = result[0].numberOfDone;
-					var barChart = new Chart(ctx, {
-						type: 'horizontalBar',
-						data: {
-							labels: ['Total Tasks', 'Tasks Todo', 'Tasks Doing', 'Tasks Done'],
-							datasets: [
-								{
-									label: 'All Tasks',
-									backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#c45850'],
-									data: [totalTask, toDoTask, doingTask, doneTask],
-								},
-							],
-						},
-						options: {
-							title: {
-								display: true,
-								text: 'Project Progress chart',
+	$.get('/api/myData/tasksTodo', function (result) {
+		toDoTask = result[0].numberOfTodo;
+		$.get('/api/myData/tasksDoing', function (result) {
+			doingTask = result[0].numberOfDoing;
+			$.get('/api/myData/tasksDone', function (result) {
+				doneTask = result[0].numberOfDone;
+				totalTask = toDoTask + doingTask + doneTask;
+				Chart.scaleService.updateScaleDefaults('linear', {
+					ticks: {
+						min: 0,
+						max: totalTask,
+					},
+				});
+				var ctx = document.getElementById('myBarChart').getContext('2d');
+				var barChart = new Chart(ctx, {
+					type: 'horizontalBar',
+					data: {
+						labels: ['Total Tasks', 'Tasks Todo', 'Tasks Doing', 'Tasks Done'],
+						datasets: [
+							{
+								label: 'All Tasks',
+								backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#c45850'],
+								data: [totalTask, toDoTask, doingTask, doneTask],
 							},
+						],
+					},
+					options: {
+						title: {
+							display: true,
+							text: 'Project Progress chart',
 						},
-					});
+					},
 				});
 			});
 		});
