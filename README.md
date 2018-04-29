@@ -1,18 +1,38 @@
-# My master thesis project
-# Details
-# Masters thesis
-### Title: Development of a web-platform to support Project based learning(PBL)
+---
+title: ePBL
+---
+# ePBL (electronic Project-Based Learning) platform
+## Details:
+## A Masters thesis work by Md Ariful Islam, 3003059, Uni Duisburg-Essen, 2018
+### Thesis Title: Development of a web-platform to support Project based learning(PBL)
 
-During the last decade, the maker movement gathered new momentum. A growing number of Fabrication Labs(Fab-Labs) provides facilities for micro fabrication also aiming for educational use. Microcontroller such as Arduino are dedicated and well suited for in school usage. This has been underpinned by many curricula and the research in the pedagogical field of project-based learning(PBL). To effectively support learning, software system to support PBL are needed.
-The goal of the thesis is to analyses and identify important aspects and workflows of PBL, and to design and develop a web-based software system to support students in their activities in conducting projects. Four important activities in the context of this thesis are the “sharing of ideas” (idea generation and refinement; driving questions), “project planning/organization”, “sharing of showcases”, “documentation” and “presentation” of final products. The concept of “flow experience” in the context of PBL creates additional requirements as it might create a tension between guidance through the system and the learner’s focus when he is in a flow experience during his project investigation.
-Communication facilities for learners and an embedment into social context (sharing, collaborating etc.) add elements of social media platforms to the PBL software system. Therefore, the design should follow the paradigms of modern social network platforms and incorporate aspects of PBL in the form of a content management system that enables adding content specific blocks. The known “Timeline” metaphor can be used to organize the personal view on shared objects and communication streams such as project notifications or tasks.
+Electronic Project-based learning (ePBL) tool can be the ideal platform by using project-based learning(PBL) features in it. By the help of generic model and scientific papers about project-based learning gives the essential features of project-based learning. A new model of Project-based learning showed in this thesis which covers general characteristics that project-based education should have. This thesis also showed a comparison with existing project-based learning platforms, and activity flows of PBL, storyboard, related works, etc. Learners will engage in real-life problem/project and can track all their efforts, actions, feedbacks, results, presentations, discussions, collaboration, new ideas. They can share social context and showcase their work. In this work, we also talked about flow-experience support, timeline and data analytics. The outcomes of the project could be a single exportable artefact and documentation using the platform. The developed software prototype shown in this thesis is extendable and reusable. 
 
 ### Thesis Start: November 2017
-### Final Submission: April 2018
+### Final Submission: 30, April 2018
 
-##Tools: Node js, javaScripts, keystone js, sir-trevor js, bootstrap js, jquery, MongoDB
+##Tools: Node.js, javaScripts, keystone.js, sir-trevor.js, twitter bootstrap, jquery, css, handlebars.js, socket.io, MongoDB, mongoose, 
 
 # Software version: 0.0.1
+## Installation guide
+Please follow these steps to run this software:
+1. install node js and mongodb
+
+```
+npm install --save nodejs mongodb
+```
+
+2. then generate keystone
+
+```
+npm install -g generator-keystone
+```
+
+3. unzip the file and login using below auth for admin or create new teacher and student account.
+
+```
+User: user@keystonejs.com Password: admin
+```
 
 # About me:
 I am Md Ariful Islam. I am a Computer engineer and doing my MSc. in University Duisburg-Essen, Germany. Beside my study

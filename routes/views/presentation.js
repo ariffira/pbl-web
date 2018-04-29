@@ -40,8 +40,13 @@ exports = module.exports = function (req, res) {
 			// find project data
 			Project.model.findById(projectId).exec(function (err, result) {
 				locals.data.project = result;
-				var participants = JSON.parse(result.participants);
-				locals.data.participants = participants;
+				if (result.participants) {
+					var participants = JSON.parse(result.participants);
+					locals.data.participants = participants;
+				}
+				else {
+					locals.data.participants = result.participants;
+				}
 				if (result.allLearningGoals) {
 					var allLearningGoals = JSON.parse(result.allLearningGoals);
 					locals.data.allLearningGoals = allLearningGoals;

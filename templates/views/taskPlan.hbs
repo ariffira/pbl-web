@@ -40,18 +40,34 @@
 	</div>
 {{else}}
 {{#ifeq user.role 'student' }}
-	<div class="form-group">
-		<div class="form-row">
-			<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+	{{#if user.projectId }}
+		<div class="form-group">
+			<div class="form-row">
+				<h5>There is no Task-plan for this project. Please create a task plan first.</h5>
+			</div>
 		</div>
-	</div>
+	{{else}}
+		<div class="form-group">
+			<div class="form-row">
+				<h5>You do not have any project yet. Please enroll in a project or contact with your teacher</h5>
+			</div>
+		</div>
+	{{/if}}
 {{/ifeq}}
 {{#ifeq user.role 'teacher' }}
-	<div class="form-group">
-		<div class="form-row">
-			<h5>You do not have any project yet. Please create project and add your students in the project then generate it</h5>
+	{{#if user.projectId }}
+		<div class="form-group">
+			<div class="form-row">
+				<h5>There is no Task-plan for this project. Please create a task plan first.</h5>
+			</div>
 		</div>
-	</div>
+	{{else}}
+		<div class="form-group">
+			<div class="form-row">
+				<h5>You do not have any project yet. Please create project and add your students in the project then generate it</h5>
+			</div>
+		</div>
+	{{/if}}
 {{/ifeq}}
 {{/if}}
 <!-- Modal for add Task -->
