@@ -35,6 +35,3 @@ node_modules
 .idea
 .svn
 
-# upload storage
-public/uploads/
-protected/uploads/
