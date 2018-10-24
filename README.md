@@ -35,7 +35,7 @@ User: user@keystonejs.com Password: admin
 ```
 
 # About me:
-I am Md Ariful Islam. I am a Computer engineer and doing my MSc. in University Duisburg-Essen, Germany. Beside my study
-I practice programming languages and software tools as my hobby. 
+I am Md Ariful Islam. I am a Computer engineer and did my MSc. in University Duisburg-Essen, Germany. Beside my study
+I practice programming languages and software tools as my hobby. This is one of my prototype of elearning. 
 
 
